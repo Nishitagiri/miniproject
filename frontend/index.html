@@ -1,0 +1,4321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Art and Science of Karate-Do</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<title>Art and Science of Karate</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+<style>
+  
+/* ALL CSS REMAINS EXACTLY THE SAME AS ORIGINAL - NO CHANGES */
+:root {
+  --gold: #c9a227;
+  --gold-light: #e6b82e;
+  --gold-dark: #a88420;
+  --ink: #050505;
+  --card: #0e0e0e;
+  --border: #1f1f1f;
+  --border-light: #333;
+  --muted: #9ca3af;
+  --muted-light: #d1d5db;
+  --sakura: #ff9eb5;
+  --red: #b91c1c;
+  --paper: #fffaf0;
+  --bamboo: #769164;
+  --indigo: #264348;
+  --shadow: rgba(0, 0, 0, 0.7);
+  --correct: #10b981;
+  --incorrect: #ef4444;
+  --quiz-bg: rgba(201, 162, 39, 0.05);
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--gold);
+  padding: 8px 15px;
+  margin: 0 5px;
+  border-radius: 30px;
+  box-shadow: none;
+  color: var(--gold);
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(201, 162, 39, 0.1);
+  transform: translateY(-2px);
+}
+
+.theme-toggle-btn i {
+  font-size: 14px;
+}
+
+.theme-text {
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+/* Light Theme Variables */
+:root.light-mode {
+  --gold: #ecc665;
+  --gold-light: #daa520;
+  --gold-dark: #b88914;
+  --ink: #f5f5f5;
+  --card: #fff9f0;
+  --border: #e0d5c0;
+  --border-light: #d4c5aa;
+  --muted: #5d4e3c;
+  --muted-light: #3a3229;
+  --sakura: #d87093;
+  --red: #b22222;
+  --paper: #faf0e6;
+  --bamboo: #556b2f;
+  --indigo: #4a6b7a;
+  --shadow: rgba(139, 69, 19, 0.2);
+  --correct: #2e7d32;
+  --incorrect: #c62828;
+  --quiz-bg: rgba(184, 134, 11, 0.05);
+  --bg-primary: #faf3e8;
+  --bg-secondary: #f5e6d3;
+  --text-primary: ;
+  --text-secondary: #4a3f35;
+}
+
+body.light-mode {
+  color: var(--text-primary);
+  background: 
+    radial-gradient(circle at 20% 20%, #f5e6d3 0%, #e8d9c4 100%),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(0,0,0,.02) 0px,
+      rgba(0,0,0,.02) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+}
+
+.light-mode .header-container {
+  background: rgba(245, 230, 211, 0.9);
+  border-bottom: 1px solid rgba(184, 134, 11, 0.2);
+}
+
+.light-mode .login-box {
+  background: linear-gradient(145deg, rgba(245, 230, 211, 0.9), rgba(235, 215, 190, 0.95));
+}
+
+.light-mode input, 
+.light-mode textarea {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+.light-mode .card {
+  background: linear-gradient(145deg, rgba(255, 249, 240, 0.95), rgba(250, 240, 230, 0.98));
+}
+
+.light-mode .card p {
+  color: var(--text-secondary);
+}
+
+.light-mode .progress-container,
+.light-mode .score-container,
+.light-mode .dojo-section,
+.light-mode .timeline-content,
+.light-mode .journal-box,
+.light-mode .stat-card {
+  background: linear-gradient(180deg, rgba(255, 249, 240, 0.7), rgba(250, 240, 230, 0.9));
+}
+
+.light-mode .quiz-section {
+  background: rgba(184, 134, 11, 0.03);
+}
+
+.light-mode .quiz-question {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.light-mode .quiz-option {
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--text-primary);
+}
+
+.light-mode .fun-qa-section {
+  background: rgba(85, 107, 47, 0.05);
+}
+
+.light-mode .technique-item {
+  background: rgba(184, 134, 11, 0.05);
+  color: var(--text-secondary);
+}
+
+.light-mode footer {
+  background: rgba(245, 230, 211, 0.8);
+  color: var(--text-secondary);
+}
+
+.light-mode .kata-modal-content {
+  background: rgba(250, 240, 230, 0.98);
+}
+
+.light-mode .theme-toggle-btn {
+  background: rgba(184, 134, 11, 0.1);
+  border-color: var(--gold-dark);
+  color: var(--gold-dark);
+}
+
+.light-mode .nav-link {
+  color: var(--text-secondary);
+}
+
+.light-mode .nav-link:hover,
+.light-mode .nav-link.active {
+  color: var(--gold-dark);
+}
+
+/* Flashcard Styles */
+.flashcard {
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  margin: 0 auto;
+  position: relative;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.flashcard.flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(145deg, rgba(25,25,25,0.9), rgba(15,15,15,0.95));
+  border: 2px solid var(--gold);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.light-mode .flashcard-front,
+.light-mode .flashcard-back {
+  background: linear-gradient(145deg, rgba(255, 249, 240, 0.95), rgba(250, 240, 230, 0.98));
+}
+
+.flashcard-back {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front h2,
+.flashcard-back h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.flashcard-front p,
+.flashcard-back p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+#quizModeCheckbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--gold);
+}
+
+/* Quiz button styles */
+#startQuizBtn {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: black;
+  font-weight: 700;
+  padding: 12px 30px;
+  border-radius: 30px;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+#startQuizBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(201, 162, 39, 0.4);
+}
+
+#checkAnswerBtn, #showAnswerBtn {
+  padding: 10px 20px;
+  margin: 0 5px;
+}
+
+#showAnswerBtn {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+}
+
+#showAnswerBtn:hover {
+  background: rgba(201, 162, 39, 0.1);
+}
+
+.light-mode #startQuizBtn {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  color: white;
+}
+
+.light-mode #showAnswerBtn {
+  border-color: var(--gold-dark);
+  color: var(--gold-dark);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: white;
+  background:
+    radial-gradient(circle at 20% 20%, #1a1a1a 0%, #000 100%),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255,255,255,.01) 0px,
+      rgba(255,255,255,.01) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+  overflow-x: hidden;
+}
+
+/* HEADER & NAVIGATION */
+.header-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+  z-index: 1000;
+  padding: 0;
+  box-shadow: 0 5px 30px var(--shadow);
+  transition: all 0.4s ease;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo-kanji {
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-shadow: 0 0 15px rgba(201, 162, 39, 0.5);
+  line-height: 1;
+}
+
+.logo-subtitle {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 4px;
+  margin-top: 3px;
+  font-family: "Roboto", sans-serif;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+}
+
+.nav-link {
+  color: var(--muted-light);
+  text-decoration: none;
+  letter-spacing: 2px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s;
+  position: relative;
+  padding: 5px 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.nav-link i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.nav-link:hover {
+  color: var(--gold);
+  text-shadow: 0 0 10px rgba(201, 162, 39, 0.3);
+}
+
+.nav-link.active {
+  color: var(--gold);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+/* BUTTONS */
+button {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border: none;
+  padding: 12px 24px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(201, 162, 39, 0.3);
+  color: black;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(201, 162, 39, 0.6);
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+}
+
+/* INPUT */
+input, textarea {
+  width: 100%;
+  padding: 14px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.2);
+}
+
+/* LOGIN */
+#login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("C:/Users/wasim/SE  Mean stack/dojo.png") center/cover no-repeat;
+  opacity: 0.15;
+  filter: grayscale(100%);
+}
+
+.login-box {
+  background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.95));
+  border: 1px solid rgba(201, 162, 39, 0.2);
+  padding: 45px;
+  width: 380px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(201,162,39,0.2);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+}
+
+.login-box h2 {
+  font-family: "Playfair Display", serif;
+  letter-spacing: 6px;
+  margin-bottom: 25px;
+  font-size: 32px;
+  color: var(--gold);
+  text-shadow: 0 0 15px rgba(201, 162, 39, 0.3);
+}
+
+/* MAIN TITLE */
+.main-title {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.main-title h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 42px;
+  letter-spacing: 8px;
+  margin-bottom: 10px;
+  color: var(--gold);
+  text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  display: inline-block;
+}
+
+.main-title h1::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.main-title .subtitle {
+  font-size: 16px;
+  color: var(--muted-light);
+  letter-spacing: 2px;
+  margin-top: 25px;
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* DASHBOARD */
+#dashboard {
+  display: none;
+  padding: 120px 40px 60px;
+}
+
+/* BELT DISPLAY */
+.belt-container {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.belt {
+  display: inline-block;
+  padding: 15px 40px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--gold), #9f7f1c, var(--gold));
+  color: black;
+  font-weight: 800;
+  letter-spacing: 3px;
+  box-shadow: 0 10px 30px rgba(201, 162, 39, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.belt::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: belt-shine 3s infinite;
+}
+
+@keyframes belt-shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* PROGRESS */
+.progress-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 30px;
+  background: linear-gradient(180deg, rgba(20,20,20,0.7), rgba(10,10,10,0.9));
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.progress-bar {
+  height: 12px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 25px 0;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), #ffd700, var(--gold));
+  border-radius: 6px;
+  transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: progress-shine 2s infinite;
+}
+
+@keyframes progress-shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* SCORE DISPLAY */
+.score-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 25px;
+  background: linear-gradient(180deg, rgba(20,20,20,0.7), rgba(10,10,10,0.9));
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.score-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.score-stat {
+  text-align: center;
+  padding: 15px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.score-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+
+.score-label {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+/* GRID - ENHANCED FOR PREMIUM LOOK */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 35px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* CARD - PREMIUM ENHANCEMENT */
+.card {
+  background: linear-gradient(145deg, rgba(18,18,18,0.95), rgba(8,8,8,0.98));
+  border-radius: 24px;
+  padding: 35px;
+  border: 1px solid rgba(201, 162, 39, 0.15);
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  box-shadow:
+    0 15px 35px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  
+  /* Add flexbox for consistent button alignment */
+  display: flex;
+  flex-direction: column;
+  min-height: 320px; /* Ensures consistent card height */
+}
+
+/* Premium border effect */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 2px;
+  background: linear-gradient(135deg,
+    transparent 40%,
+    rgba(201, 162, 39, 0.3) 50%,
+    transparent 60%);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Subtle texture overlay */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  border-radius: 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card:hover {
+  transform: translateY(-12px) scale(1.02);
+  border-color: rgba(201, 162, 39, 0.4);
+  box-shadow:
+    0 25px 50px rgba(0,0,0,0.8),
+    0 0 40px rgba(201,162,39,0.25),
+    inset 0 0 30px rgba(201,162,39,0.05);
+}
+
+.card.active {
+  border: 2px solid var(--gold);
+  box-shadow:
+    0 0 40px rgba(201,162,39,.7),
+    inset 0 0 30px rgba(201,162,39,.1);
+}
+
+.card.active::before {
+  opacity: 1;
+  background: linear-gradient(135deg,
+    transparent 40%,
+    rgba(201, 162, 39, 0.6) 50%,
+    transparent 60%);
+}
+
+.card.locked {
+  opacity: .5;
+  filter: grayscale(50%);
+}
+
+.card.locked::after {
+  content: "鎖";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  border-radius: 24px;
+  letter-spacing: 10px;
+  font-size: 60px;
+  color: rgba(255,255,255,0.1);
+  z-index: 2;
+}
+
+/* Card content styling */
+.card h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 26px;
+  color: var(--gold);
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 1;
+  font-weight: 700;
+}
+
+.card p {
+  color: var(--muted-light);
+  margin-bottom: 25px;
+  font-size: 15px;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+  
+  /* Make paragraphs take available space to push button down */
+  flex-grow: 1;
+}
+
+/* Level indicator */
+.card-level {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: rgba(201, 162, 39, 0.15);
+  color: var(--gold);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border: 1px solid rgba(201, 162, 39, 0.3);
+  font-family: "Playfair Display", serif;
+}
+
+/* Card button styling - Add these rules */
+.card button {
+  margin-top: auto; /* This pushes button to bottom */
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* QUIZ STYLES */
+.quiz-section {
+  background: var(--quiz-bg);
+  border-radius: 16px;
+  padding: 25px;
+  margin: 30px 0;
+  border: 1px solid rgba(201, 162, 39, 0.2);
+}
+
+.quiz-section h3 {
+  color: var(--gold);
+  margin-bottom: 20px;
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quiz-section h3 i {
+  font-size: 24px;
+}
+
+.quiz-question {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--gold);
+}
+
+.quiz-question h4 {
+  color: white;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quiz-option {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quiz-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(5px);
+}
+
+.quiz-option.selected {
+  background: rgba(201, 162, 39, 0.15);
+  border-color: var(--gold);
+}
+
+.quiz-option.correct {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--correct);
+}
+
+.quiz-option.incorrect {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: var(--incorrect);
+}
+
+.quiz-option input {
+  margin: 0;
+  width: auto;
+}
+
+.quiz-feedback {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  display: none;
+}
+
+.quiz-feedback.correct {
+  background: rgba(16, 185, 129, 0.1);
+  border-left: 4px solid var(--correct);
+  color: #a7f3d0;
+}
+
+.quiz-feedback.incorrect {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid var(--incorrect);
+  color: #fca5a5;
+}
+
+.quiz-result {
+  text-align: center;
+  padding: 25px;
+  border-radius: 16px;
+  margin-top: 20px;
+  display: none;
+}
+
+.quiz-result h4 {
+  color: var(--gold);
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-family: "Playfair Display", serif;
+}
+
+.quiz-result p {
+  font-size: 16px;
+  color: var(--muted-light);
+  margin-bottom: 20px;
+}
+
+/* FUN Q&A STYLES */
+.fun-qa-section {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 25px;
+  margin: 30px 0;
+  border: 1px solid rgba(118, 145, 100, 0.3);
+}
+
+.fun-qa-section h3 {
+  color: var(--bamboo);
+  margin-bottom: 20px;
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fun-qa-item {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.fun-qa-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(5px);
+}
+
+.fun-qa-question {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fun-qa-question i {
+  color: var(--sakura);
+}
+
+.fun-qa-answer {
+  color: var(--muted-light);
+  font-size: 14px;
+  line-height: 1.6;
+  display: none;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fun-qa-item.active .fun-qa-answer {
+  display: block;
+}
+
+/* PAGES */
+.page {
+  display: none;
+  padding: 120px 40px 60px;
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page.active {
+  display: block;
+}
+
+/* DOJO PAGE - ENHANCED */
+#dojo {
+  padding-top: 140px;
+}
+
+.dojo-header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.dojo-header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 48px;
+  letter-spacing: 10px;
+  color: var(--gold);
+  margin-bottom: 15px;
+  text-shadow: 0 5px 15px rgba(0,0,0,0.7);
+}
+
+.dojo-header p {
+  font-size: 18px;
+  color: var(--muted-light);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.dojo-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dojo-section {
+  background: linear-gradient(145deg, rgba(25,25,25,0.8), rgba(15,15,15,0.9));
+  border-radius: 20px;
+  padding: 35px;
+  border: 1px solid var(--border);
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.dojo-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 30%, rgba(201,162,39,0.05) 100%);
+  z-index: 0;
+}
+
+.dojo-section:hover {
+  transform: translateY(-8px);
+  border-color: var(--gold);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(201,162,39,0.15);
+}
+
+.dojo-icon {
+  font-size: 40px;
+  color: var(--gold);
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(201,162,39,0.3);
+}
+
+.dojo-section h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  color: white;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.dojo-section p {
+  color: var(--muted-light);
+  line-height: 1.7;
+  margin-bottom: 25px;
+  font-size: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.technique-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.technique-item {
+  background: rgba(255,255,255,0.03);
+  padding: 12px 15px;
+  border-radius: 8px;
+  border-left: 3px solid var(--gold);
+  font-size: 14px;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+
+.technique-item::after {
+  content: "↗";
+  position: absolute;
+  right: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: var(--gold);
+  font-size: 12px;
+}
+
+.technique-item:hover::after {
+  opacity: 1;
+}
+
+/* LINEAGE PAGE - ENHANCED */
+#lineage {
+  padding-top: 140px;
+}
+
+.lineage-header {
+  text-align: center;
+  margin-bottom: 70px;
+  position: relative;
+}
+
+.lineage-header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 48px;
+  letter-spacing: 10px;
+  color: var(--gold);
+  margin-bottom: 15px;
+  text-shadow: 0 5px 15px rgba(0,0,0,0.7);
+}
+
+.lineage-header p {
+  font-size: 18px;
+  color: var(--muted-light);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.timeline-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  padding: 40px 0;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  opacity: 0.5;
+}
+
+.timeline-item {
+  margin: 60px 0;
+  position: relative;
+  width: calc(50% - 40px);
+  display: flex;
+  align-items: center;
+}
+
+.timeline-item:nth-child(odd) {
+  margin-left: auto;
+}
+
+.timeline-content {
+  background: linear-gradient(145deg, rgba(25,25,25,0.8), rgba(15,15,15,0.9));
+  border-radius: 20px;
+  padding: 30px;
+  border: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s;
+  width: 100%;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  margin-left: 40px;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  margin-right: 40px;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 20px rgba(201,162,39,0.1);
+}
+
+.timeline-year {
+  position: absolute;
+  top: -20px;
+  background: var(--gold);
+  color: black;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 14px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.timeline-item:nth-child(odd) .timeline-year {
+  right: -70px;
+}
+
+.timeline-item:nth-child(even) .timeline-year {
+  left: -70px;
+}
+
+.timeline-content h3 {
+  font-family: "Playfair Display", serif;
+  color: var(--gold);
+  font-size: 22px;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.timeline-content p {
+  color: var(--muted-light);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.timeline-dot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--gold);
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 20px rgba(201,162,39,0.7);
+  z-index: 2;
+}
+
+/* TRAINING JOURNAL */
+#journal {
+  max-width: 800px;
+  margin: 140px auto 60px;
+  padding: 0 20px;
+}
+
+.journal-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.journal-header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 42px;
+  letter-spacing: 8px;
+  color: var(--gold);
+  margin-bottom: 15px;
+}
+
+.journal-box {
+  background: linear-gradient(145deg, rgba(25,25,25,0.8), rgba(15,15,15,0.9));
+  border-radius: 20px;
+  padding: 40px;
+  border: 1px solid var(--border);
+  margin-bottom: 40px;
+}
+
+.journal-entry {
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-left: 4px solid var(--gold);
+  transition: all 0.3s;
+}
+
+.journal-entry:hover {
+  background: rgba(255,255,255,0.05);
+  transform: translateX(5px);
+}
+
+.journal-date {
+  color: var(--gold);
+  font-size: 14px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* ACHIEVEMENTS */
+#achievements {
+  padding-top: 140px;
+}
+
+.achievements-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+}
+
+.stat-card {
+  background: linear-gradient(145deg, rgba(25,25,25,0.8), rgba(15,15,15,0.9));
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid var(--border);
+  transition: all 0.4s;
+}
+
+.stat-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+.stat-value {
+  font-family: "Playfair Display", serif;
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--gold);
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px rgba(201,162,39,0.3);
+}
+
+.stat-label {
+  color: var(--muted-light);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+/* SANCTUARY CONTENT */
+#sanctuaryContent {
+  max-width: 1200px;
+  margin: 45px auto 0;
+  padding: 40px;
+  background: linear-gradient(145deg, rgba(25,25,25,0.9), rgba(15,15,15,0.95));
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8), inset 0 0 30px rgba(201,162,39,0.1);
+  display: none;
+  animation: fadeIn 0.6s ease;
+}
+
+.section {
+  margin-bottom: 35px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.section h3 {
+  font-family: "Playfair Display", serif;
+  color: var(--gold);
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+  font-size: 22px;
+  position: relative;
+  padding-left: 15px;
+}
+
+.section h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  height: 70%;
+  width: 4px;
+  background: var(--gold);
+}
+
+.section p {
+  color: var(--muted-light);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* CEREMONY */
+#ceremony {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.95);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.ceremony-box {
+  background: linear-gradient(145deg, #0a0a0a, #000);
+  border: 2px solid var(--gold);
+  padding: 60px;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0 0 100px rgba(201,162,39,0.7);
+  animation: pulse 2s infinite;
+  max-width: 600px;
+  width: 90%;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 80px rgba(201,162,39,0.7); }
+  50% { box-shadow: 0 0 120px rgba(201,162,39,0.9); }
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  margin-top: 80px;
+  color: var(--muted);
+  font-size: 14px;
+  letter-spacing: 2px;
+  padding: 30px;
+  border-top: 1px solid var(--border);
+  background: rgba(10,10,10,0.8);
+}
+
+/* SAKURA */
+.sakura {
+  position: fixed;
+  top: -10px;
+  width: 14px;
+  height: 14px;
+  background: var(--sakura);
+  border-radius: 0 100% 0 100%;
+  opacity: .75;
+  pointer-events: none;
+  animation: fall linear infinite;
+  z-index: 0;
+  filter: blur(0.5px);
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* SIMPLE KATA MODAL */
+.kata-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+.kata-modal-content {
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid var(--gold);
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.close-kata-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: var(--muted-light);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px 10px;
+  line-height: 1;
+}
+
+.close-kata-modal:hover {
+  color: var(--gold);
+}
+
+.kata-modal h3 {
+  color: var(--gold);
+  font-family: "Playfair Display", serif;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.kata-modal p {
+  color: var(--muted-light);
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Fix quiz input styling */
+#quizInputContainer input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--gold);
+  color: white;
+  padding: 12px 15px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 10px;
+  display: block;
+}
+
+#quizInputContainer input:focus {
+  outline: none;
+  border-color: var(--gold-light);
+  box-shadow: 0 0 10px rgba(201, 162, 39, 0.3);
+}
+
+#quizFeedback {
+  min-height: 40px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+#quizFeedback p {
+  margin: 0;
+  font-size: 14px;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+/* Light mode fixes */
+.light-mode #quizInputContainer input {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+  border-color: var(--gold-dark);
+}
+
+.light-mode #quizFeedback p {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 1100px) {
+  .timeline-container::before {
+    left: 40px;
+  }
+ 
+  .timeline-item {
+    width: calc(100% - 80px);
+    margin-left: 80px !important;
+  }
+ 
+  .timeline-year {
+    left: -100px !important;
+    right: auto !important;
+  }
+ 
+  .timeline-dot {
+    left: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 15px;
+  }
+ 
+  .nav-links {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+ 
+  .main-title h1 {
+    font-size: 32px;
+    letter-spacing: 5px;
+  }
+ 
+  .dojo-header h1, .lineage-header h1 {
+    font-size: 36px;
+    letter-spacing: 6px;
+  }
+ 
+  .page, #dashboard {
+    padding: 140px 20px 40px;
+  }
+ 
+  .dojo-sections, .grid {
+    grid-template-columns: 1fr;
+  }
+ 
+  .login-box {
+    width: 90%;
+    padding: 35px 25px;
+  }
+ 
+  .card {
+    padding: 30px 25px;
+  }
+ 
+  .quiz-option {
+    padding: 12px 15px;
+  }
+ 
+  .score-stats {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+<!-- HEADER - ENHANCED ATTRACTIVENESS -->
+<header class="header-container" id="nav">
+  <div class="header-content">
+    <div class="logo-container">
+      <div class="logo-kanji">空手道</div>
+      <div class="logo-subtitle">THE ART AND SCIENCE OF KARATE-DO</div>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="nav-link active" onclick="showPage('dashboard')"><i class="fas fa-torii-gate"></i> SANCTUARIES</a>
+      <a href="#" class="nav-link" onclick="showPage('dojo')"><i class="fas fa-user-ninja"></i> DOJO</a>
+      <a href="#" class="nav-link" onclick="showPage('lineage')"><i class="fas fa-history"></i> LINEAGE</a>
+      <a href="#" class="nav-link" onclick="showPage('journal')"><i class="fas fa-scroll"></i> JOURNAL</a>
+      <a href="#" class="nav-link" onclick="showPage('achievements')"><i class="fas fa-trophy"></i> ACHIEVEMENTS</a>
+      
+      <!-- Terminology Link -->
+      <a href="#" class="nav-link" onclick="showTerminologyPage()"><i class="fas fa-language"></i> TERMINOLOGY</a>
+      
+      <!-- Theme Toggle Button -->
+      <button id="themeToggle" class="theme-toggle-btn" onclick="toggleTheme()" title="Switch between Dojo Mode and Paper Mode">
+        <i class="fas fa-moon" id="themeIcon"></i>
+        <span class="theme-text" id="themeText">DOJO MODE</span>
+      </button>
+      
+      <a href="#" class="nav-link" onclick="logout()"><i class="fas fa-sign-out-alt"></i> LOGOUT</a>
+    </div>
+  </div>
+</header>
+
+<!-- LOGIN -->
+<section id="login">
+  <div class="login-bg"></div>
+  <div class="login-box">
+    <h2>空手道</h2>
+    <p style="color: var(--muted); margin-bottom: 30px; letter-spacing: 2px;">THE ART AND SCIENCE OF KARATE-DO</p>
+    
+    <!-- Login Form -->
+    <div id="loginForm">
+      <input id="loginUsername" placeholder="Username"><br><br>
+      <input id="loginPassword" type="password" placeholder="Password"><br><br>
+      <button onclick="login()"><i class="fas fa-door-open"></i> ENTER THE DOJO</button>
+      <p style="color: var(--muted); font-size: 12px; margin-top: 20px; letter-spacing: 1px;">
+        <a href="#" onclick="toggleSignup()" style="color: var(--gold); text-decoration: none; cursor: pointer;">Create new account</a>
+      </p>
+      <p style="color: var(--muted); font-size: 12px; margin-top: 10px; letter-spacing: 1px;">Use 'sensei' / 'karate' for demo access</p>
+    </div>
+    
+ 
+<!-- Signup Form (hidden by default) -->
+<div id="signupForm" style="display: none;">
+  <input id="signupUsername" type="text" placeholder="Choose Username" required><br><br>
+
+  <input id="signupEmail" type="email" placeholder="Enter Email" required><br><br>
+
+  <input id="signupPassword" type="password" placeholder="Choose Password" required><br><br>
+
+  <input id="confirmPassword" type="password" placeholder="Confirm Password" required><br><br>
+
+  <button type="button" onclick="signup()">
+    <i class="fas fa-user-plus"></i> CREATE ACCOUNT
+  </button>
+
+  <p style="color: var(--muted); font-size: 12px; margin-top: 20px; letter-spacing: 1px;">
+    <a href="#" onclick="toggleLogin(); return false;" style="color: var(--gold); text-decoration: none; cursor: pointer;">
+      Already have an account? Log in
+    </a>
+  </p>
+</div>
+
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="page">
+  <div class="main-title">
+    <h1>八つの聖域</h1>
+    <p class="subtitle">The Eight Sanctuaries of Karate-Do</p>
+    <!-- Username Display -->
+    <p style="color: var(--gold); font-size: 16px; margin-top: 10px; font-family: 'Playfair Display', serif;">
+      Welcome, <span id="displayUsername">Sensei</span>
+    </p>
+  </div>
+
+  <div class="belt-container">
+    <div class="belt">RANK: <span id="belt"></span> BELT</div>
+  </div>
+ 
+  <div class="progress-container">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+      <span style="color: var(--muted-light);">Journey to Mastery</span>
+      <span id="progressPercent" style="color: var(--gold); font-weight: 700;">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+      <span style="font-size: 12px; color: var(--muted);">White Belt</span>
+      <span style="font-size: 12px; color: var(--muted);">Black Belt</span>
+    </div>
+  </div>
+ 
+  <div class="score-container">
+    <h3 style="color: var(--gold); text-align: center; margin-bottom: 20px; letter-spacing: 2px;">PROGRESS SCORE</h3>
+    <div class="score-stats">
+      <div class="score-stat">
+        <div class="score-value" id="overallScore">0/1000</div>
+        <div class="score-label">OVERALL SCORE</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-value" id="quizAverage">0%</div>
+        <div class="score-label">QUIZ AVERAGE</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-value" id="completedLevels">0/10</div>
+        <div class="score-label">LEVELS COMPLETED</div>
+      </div>
+      <div class="score-stat">
+        <div class="score-value" id="achievementsEarned">0/14</div>
+        <div class="score-label">ACHIEVEMENTS</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div id="sanctuaryContent"></div>
+
+  <footer>© Nishita Giri • 空手道 Digital Dojo</footer>
+</section>
+
+<!-- DOJO PAGE - ENHANCED -->
+<section id="dojo" class="page">
+  <div class="dojo-header">
+    <h1>道場</h1>
+    <p>The traditional training hall where mind, body, and spirit unite through disciplined practice.</p>
+  </div>
+ 
+  <div class="dojo-sections">
+    <div class="dojo-section">
+      <div class="dojo-icon"><i class="fas fa-fist-raised"></i></div>
+      <h3>基本 (Kihon)</h3>
+      <p>The foundation of karate. Master the basic techniques that form the building blocks of all advanced movements.</p>
+      <div class="technique-grid">
+        <div class="technique-item">Sugi Waza (Punching Techniques)</div>
+        <div class="technique-item">Shotei Waza (Punches with Heel of Palm Techniques)</div>
+        <div class="technique-item">Nukite Waza(Fingertips Techniques)</div>
+        <div class="technique-item">Uchi Wazza (Striking Techniques)</div>
+        <div class="technique-item">Geri Waza (Kicking Techniques)</div>
+        <div class="technique-item">Ate Waza (Elbow Techniques)</div>
+        <div class="technique-item">Uke Waza (Blocking Techniques)</div>
+        <div class="technique-item">Ko Uke Waza (Blocking Techniques with Wrist)</div>
+      </div>
+      <button onclick="openCoreTechniquesModal()" style="margin-top: 20px;"><i class="fas fa-dumbbell"></i> CORE TECHNIQUES</button>
+    </div>
+   
+    <div class="dojo-section">
+      <div class="dojo-icon"><i class="fas fa-yin-yang"></i></div>
+      <h3>型 (Kata)</h3>
+      <p>Pre-arranged forms simulating combat against multiple opponents. Each movement has practical application (bunkai).</p>
+      <div class="technique-grid">
+        <div class="technique-item" onclick="openKataLink('sanchin')">Sanchin (Breathing Form. Three Steps Battle)</div>
+        <div class="technique-item" onclick="openKataLink('gekisai-dai-ichi')">Gekisai Dai Ichi (Drill kata. Destroy, demolish kata)</div>
+        <div class="technique-item" onclick="openKataLink('gekisai-dai-ni')">Gekisai Dai Ni (Drill kata. Destroy, demolish kata)</div>
+        <div class="technique-item" onclick="openKataLink('saifa')">Saifa (Tearing Kata. Monkey Kata)</div>
+        <div class="technique-item" onclick="openKataLink('shisochin')">Shisochin (Dragon Kata. Four Peaceful Facing)</div>
+        <div class="technique-item" onclick="openKataLink('seiunchin')">Seiunchin (Tiger Kata. Marching Far Quietly)</div>
+        <div class="technique-item" onclick="openKataLink('sanseru')">Sanseru (36 Techniques)</div>
+        <div class="technique-item" onclick="openKataLink('seipai')">Seipai (Snake Kata)</div>
+        <div class="technique-item" onclick="openKataLink('sesan')">Sesan (13 Techniques)</div>
+        <div class="technique-item" onclick="openKataLink('kururunfa')">Kururunfa (Praying Mantis. For Ever Stops)</div>
+        <div class="technique-item" onclick="openKataLink('superimpei')">Superimpei (108 Techniques)</div>
+        <div class="technique-item" onclick="openKataLink('tensho')">Tensho (Turning Palms. Advanced Breathing Form)</div>
+      </div>
+      <button onclick="openKataModal()" style="margin-top: 20px;"><i class="fas fa-tasks"></i> STUDY KATA</button>
+    </div>
+   
+    <div class="dojo-section">
+      <div class="dojo-icon"><i class="fas fa-user-friends"></i></div> 
+      <h3>組手 (Kumite)</h3>
+      <p>Sparring practice that applies techniques against a live opponent. Develops timing, distance, and strategy.</p>
+      <div class="technique-grid">
+        <div class="technique-item">Yakusoku Kumite</div>
+        <div class="technique-item">Ippon, Nihon, Sanbon, Yonhon, Gohon Kumite</div>
+        <div class="technique-item">Jiyu Ippon Kumite</div>
+        <div class="technique-item">Sandan Gi</div>
+        <div class="technique-item">Shikodachi Langeki</div>
+        <div class="technique-item">Jun Langeki</div>
+        <div class="technique-item">Randori Kumite</div>
+        <div class="technique-item">Jiyu Kumite</div>
+        <div class="technique-item">Shiai Kumite</div>
+        <div class="technique-item">Khakhai Khakhite Kumite</div>
+        <div class="technique-item">Khakome Kumite</div>
+        <div class="technique-item">Renzon Kumite</div>
+        <div class="technique-item">Bunkai Kumite</div>
+        <div class="technique-item">Shadow Shiai Kumite</div>
+      </div>
+      <button onclick="openSparringModal()" style="margin-top: 20px;"><i class="fas fa-shield-alt"></i> STUDY SPARRINGS</button>
+    </div>
+   
+    <div class="dojo-section">
+      <div class="dojo-icon"><i class="fas fa-dumbbell"></i></div>
+      <h3>補強運動 (Hojo Undo)</h3>
+      <p>Traditional supplementary training using specialized equipment to develop strength, power, and conditioning.</p>
+      <div class="technique-grid">
+        <div class="technique-item">Junbi Undo (Preparatory Exercise)</div>
+        <div class="technique-item">Seiri Undo (Supplementary Exercise)</div>
+        <div class="technique-item">Hojo Undo (Complementary Exercise)</div>
+        <div class="technique-item">Sumatsu Undo (Coolingdown Exercise)</div>
+        <div class="technique-item">Makiwara (Stripping Post)</div>
+        <div class="technique-item">Chiishi (Stone Lever)</div>
+        <div class="technique-item">Nigiri Game (Gripping Jars)</div>
+        <div class="technique-item">Kongoken (Iron Ring)</div>
+        <div class="technique-item">Tetsu-geta (Iron Sandals)</div>
+        <div class="technique-item">Tan (Barbell)</div>
+        <div class="technique-item">Sai</div>
+        <div class="technique-item">Kama</div>
+        <div class="technique-item">Nunchaku</div>
+        <div class="technique-item">Tonfa / Tui-fa</div>
+      </div>
+      <button onclick="openEquipmentModal()" style="margin-top: 20px;"><i class="fas fa-tools"></i> THE EQUIPMENT</button>
+    </div>
+  </div>
+</section>
+
+<!-- LINEAGE PAGE - ENHANCED -->
+<section id="lineage" class="page">
+  <div class="lineage-header">
+    <h1>系譜</h1>
+    <p>The unbroken chain of knowledge transmission from master to student across generations.</p>
+  </div>
+ 
+  <div class="timeline-container">
+    <div class="timeline-dot"></div>
+   
+    <div class="timeline-item">
+      <div class="timeline-year">1600s</div>
+      <div class="timeline-content">
+        <h3>Okinawan Roots</h3>
+        <p>The indigenous martial art of "Te" (hand) develops in Okinawa, influenced by Chinese martial artists who visit the Ryukyu Kingdom. The banning of weapons by King Sho Shin leads to the refinement of empty-hand techniques.</p>
+      </div>
+    </div>
+   
+    <div class="timeline-item">
+      <div class="timeline-year">1867</div>
+      <div class="timeline-content">
+        <h3>Kanryo Higaonna</h3>
+        <p>Travels to Fuzhou, China, where he studies under Master Ryu Ryu Ko for approximately 13 years. Returns to Okinawa and begins teaching "Naha-te," which emphasizes close-range combat and circular movements.</p>
+      </div>
+    </div>
+   
+    <div class="timeline-item">
+      <div class="timeline-year">1930</div>
+      <div class="timeline-content">
+        <h3>Chojun Miyagi</h3>
+        <p>Establishes Goju-Ryu Karate-do, naming it after the concepts in the "Bubishi" (Go = hard, Ju = soft). Systemizes the curriculum with foundational kata Sanchin and advanced kata like Seisan and Suparinpei.</p>
+      </div>
+    </div>
+   
+    <div class="timeline-item">
+      <div class="timeline-year">1963</div>
+      <div class="timeline-content">
+        <h3>Meitoku Yagi</h3>
+        <p>Designated as Miyagi's successor. After Miyagi's passing, continues to teach and spread Goju-Ryu worldwide while maintaining traditional values. Establishes the Meibukan dojo.</p>
+      </div>
+    </div>
+   
+    <div class="timeline-item">
+      <div class="timeline-year">Present</div>
+      <div class="timeline-content">
+        <h3>Digital Dojo</h3>
+        <p>Continuing the lineage through modern technology while preserving traditional teachings. Making the art accessible worldwide while maintaining the essence of Okinawan Goju-Ryu Karate-do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING JOURNAL -->
+<section id="journal" class="page">
+  <div class="journal-header">
+    <h1>稽古日誌</h1>
+    <p style="color: var(--muted-light); margin-top: 15px;">Record your training insights, progress, and reflections</p>
+  </div>
+ 
+  <div class="journal-box">
+    <h3 style="color: var(--gold); margin-bottom: 20px;">今日の稽古 (Today's Training)</h3>
+    <textarea id="journalEntry" placeholder="What did you practice today? What insights did you gain? What challenges did you face?..." rows="8"></textarea>
+    <div style="display: flex; gap: 15px; margin-top: 25px;">
+      <button onclick="saveJournal()"><i class="fas fa-save"></i> SAVE ENTRY</button>
+      <button class="secondary-btn" onclick="viewPastEntries()"><i class="fas fa-history"></i> VIEW PAST ENTRIES</button>
+    </div>
+  </div>
+ 
+  <div id="pastEntries"></div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="page">
+  <div class="achievements-header">
+    <h1>実績</h1>
+    <p style="color: var(--muted-light); margin-top: 15px;">Your karate journey quantified</p>
+    
+    <!-- Export buttons -->
+    <div style="margin-top: 20px;">
+      <button onclick="exportTrainingData()" class="secondary-btn" style="margin-right: 10px;">
+        <i class="fas fa-download"></i> EXPORT DATA (CSV)
+      </button>
+      <button onclick="generateProgressReport()" class="secondary-btn">
+        <i class="fas fa-file-pdf"></i> GENERATE REPORT
+      </button>
+    </div>
+  </div>
+ 
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value" id="techniquesCount">0</div>
+      <div class="stat-label">TECHNIQUES MASTERED</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="trainingDays">0</div>
+      <div class="stat-label">TRAINING DAYS</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="kataCompleted">0</div>
+      <div class="stat-label">KATA COMPLETED</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="dojoHours">0</div>
+      <div class="stat-label">DOJO HOURS</div>
+    </div>
+  </div>
+ 
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <h3 style="color: var(--gold); text-align: center; margin-bottom: 30px; letter-spacing: 3px;">RECENT ACHIEVEMENTS</h3>
+    <div class="grid" id="achievementsGrid">
+      <!-- Achievements will be dynamically added here -->
+    </div>
+  </div>
+</section>
+
+<!-- TERMINOLOGY PAGE - WITH START QUIZ BUTTON -->
+<section id="terminology" class="page">
+  <div class="dojo-header">
+    <h1>用語集</h1>
+    <p>Master the language of Karate-Do through interactive flashcards</p>
+  </div>
+  
+  <div class="dojo-sections">
+    <!-- Category Selection -->
+    <div class="dojo-section" style="grid-column: 1 / -1;">
+      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <button class="secondary-btn" onclick="loadFlashcards('striking points')">
+          <i class="fas fa-fist-raised"></i> STRIKING POINTS
+        </button>
+        <button class="secondary-btn" onclick="loadFlashcards('founder')">
+          <i class="fas fa-history"></i> FOUNDERS
+        </button>
+        <button class="secondary-btn" onclick="loadFlashcards('commands')">
+          <i class="fas fa-gavel"></i> COMMANDS
+        </button>
+        <button class="secondary-btn" onclick="loadFlashcards('kyusho')">
+          <i class="fas fa-bullseye"></i> KYUSHO (VITAL POINTS)
+        </button>
+        <button class="secondary-btn" onclick="loadFlashcards('philosophy')">
+          <i class="fas fa-yin-yang"></i> PHILOSOPHY
+        </button>
+      </div>
+    </div>
+    
+    <!-- Flashcard Display -->
+    <div class="dojo-section" style="grid-column: 1 / -1; min-height: 400px;">
+      <div id="flashcardCategory" style="text-align: center; color: var(--gold); margin-bottom: 20px; font-size: 24px; font-family: 'Playfair Display', serif;">
+        Select a category to begin
+      </div>
+      
+      <div id="flashcardContainer" style="perspective: 1000px; min-height: 300px;">
+        <div id="flashcard" class="flashcard" onclick="flipCard()">
+          <div class="flashcard-front">
+            <h2 id="frontContent" style="color: var(--gold);">🥋</h2>
+            <p style="color: var(--muted); margin-top: 20px;">Click to flip</p>
+          </div>
+          <div class="flashcard-back">
+            <h2 id="backContent" style="color: var(--gold);"></h2>
+            <p id="backDetail" style="color: var(--muted-light); margin-top: 15px;"></p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Card Controls -->
+      <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 30px;">
+        <button class="secondary-btn" onclick="previousCard()" id="prevCardBtn" disabled>
+          <i class="fas fa-arrow-left"></i> PREVIOUS
+        </button>
+        <span id="cardCounter" style="color: var(--gold); font-size: 18px; font-weight: bold; min-width: 80px; text-align: center;">0/0</span>
+        <button class="secondary-btn" onclick="nextCard()" id="nextCardBtn" disabled>
+          NEXT <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+      
+      <!-- Quiz Mode Section - WITH START QUIZ BUTTON -->
+      <div style="text-align: center; margin-top: 30px; padding: 20px; background: rgba(201, 162, 39, 0.05); border-radius: 15px;">
+        <h3 style="color: var(--gold); margin-bottom: 15px; font-family: 'Playfair Display', serif;">
+          <i class="fas fa-question-circle"></i> Test Your Knowledge
+        </h3>
+        
+        <!-- START QUIZ BUTTON -->
+        <button onclick="startQuizMode()" id="startQuizBtn" class="secondary-btn" style="padding: 15px 30px; font-size: 16px; margin-bottom: 15px;">
+          <i class="fas fa-play"></i> START QUIZ
+        </button>
+        
+        <p style="color: var(--muted-light); margin-bottom: 15px;">or</p>
+        
+        <!-- Quiz Mode Toggle (kept for backward compatibility) -->
+        <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer;">
+          <input type="checkbox" id="quizModeCheckbox" onchange="toggleQuizMode()">
+          <span style="color: var(--muted-light);">Quiz Mode (Test yourself)</span>
+        </label>
+        
+        <!-- Quiz Answer Input (hidden by default) -->
+        <div id="quizInputContainer" style="display: none; margin-top: 20px; text-align: center;">
+          <input type="text" id="quizAnswer" placeholder="Type your answer here..." style="max-width: 300px; margin: 0 auto 10px;">
+          <div style="display: flex; gap: 10px; justify-content: center;">
+            <button onclick="checkQuizAnswer()" id="checkAnswerBtn">
+              <i class="fas fa-check"></i> CHECK ANSWER
+            </button>
+            <button class="secondary-btn" onclick="showAnswer()" id="showAnswerBtn">
+              <i class="fas fa-eye"></i> SHOW ANSWER
+            </button>
+          </div>
+          <div id="quizFeedback" style="margin-top: 15px; min-height: 40px;"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Progress Stats -->
+    <div class="stat-card" style="grid-column: 1 / -1;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+        <div>
+          <div class="stat-value" id="termsLearned">0</div>
+          <div class="stat-label">TERMS LEARNED</div>
+        </div>
+        <div>
+          <div class="stat-value" id="quizScore">0%</div>
+          <div class="stat-label">QUIZ ACCURACY</div>
+        </div>
+        <div>
+          <div class="stat-value" id="studyStreak">0</div>
+          <div class="stat-label">STUDY STREAK</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIMPLE KATA MODAL -->
+<div id="kataModal" class="kata-modal">
+  <div class="kata-modal-content">
+    <button class="close-kata-modal" onclick="closeKataModal()">&times;</button>
+    <h3>The Heart of Karate</h3>
+    <div style="text-align: left; color: var(--muted-light); line-height: 1.8;">
+      <h4 style="color: var(--gold); margin: 20px 0 10px;">There are 12 Kata in Goju-Ryu </h4>
+      <p>Kata is a set of defensive and offensive techniques developed over years by karate masters. Each movement is carefully selected and has profound meaning.</p>
+      
+      <h4 style="color: var(--gold); margin: 20px 0 10px;">Meibukan Goju-ryu Kata</h4>
+      <ul style="padding-left: 20px; margin-bottom: 20px;">
+        <li><strong>Tenchi</strong>: Earth and Heaven Kata, Basic Drill Kata. Also can be divited in two different katas - Fugyu kata ichi and Fugya kata Ni</li>
+        <li><strong>Seiryu</strong>: Blue Dragon. God of East</li>
+        <li><strong>Byakko</strong>: White Tiger. God of West</li>
+        <li><strong>Shujaku</strong>: Red Sparrow or Crimson Bird. God of South</li>
+        <li><strong>Genbu</strong>: Black Turtle. God of North</li>
+      </ul>
+      
+      <p>Through kata practice, students develop muscle memory, proper body mechanics, and fighting strategies. The repetition of these forms ingrains techniques into the subconscious, allowing them to be executed instinctively in real situations. Application of Kata with a partner / in real life scenerios is called "Bunkai".</p>
+    </div>
+    <div style="text-align: center; margin-top: 25px;">
+      <button onclick="closeCoreTechniquesModal()">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<!-- CORE TECHNIQUES MODAL -->
+<div id="coreTechniquesModal" class="kata-modal">
+  <div class="kata-modal-content">
+    <button class="close-kata-modal" onclick="closeCoreTechniquesModal()">&times;</button>
+    <h3>Core Techniques of Goju-Ryu Karate</h3>
+    <div style="text-align: left; color: var(--muted-light); line-height: 1.8;">
+      <h4 style="color: var(--gold); margin: 20px 0 10px;">Kokutsu-dachi (Back Stance)</h4>
+      <p>A fundamental stance where 70% of weight is on the back leg, 30% on the front leg. Used for defensive positioning and quick counterattacks.</p>
+      
+      <h4 style="color: var(--gold); margin: 20px 0 10px;">Core Katas</h4>
+      <ul style="padding-left: 20px; margin-bottom: 20px;">
+        <li><strong>Shisochin (Dragon Kata)</strong>: "Four Peaceful Facing" - emphasizes open hand techniques and circular movements</li>
+        <li><strong>Seiunchin (Tiger Kata)</strong>: "Marching Far Quietly" - focuses on close-quarter combat and grappling</li>
+        <li><strong>Sanseru (36 Techniques)</strong>: Intermediate kata with 36 movements representing various combat scenarios</li>
+        <li><strong>Seipai (Snake Kata)</strong>: "18 Hands" - features quick, snakelike strikes and evasive movements</li>
+      </ul>
+      
+      <p>These core techniques form the foundation of Goju-Ryu, balancing hard (Go) and soft (Ju) elements through proper breathing, tension, and relaxation.</p>
+    </div>
+    <div style="text-align: center; margin-top: 25px;">
+      <button onclick="closeCoreTechniquesModal()">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<!-- STUDY SPARRINGS MODAL -->
+<div id="sparringModal" class="kata-modal">
+  <div class="kata-modal-content">
+    <button class="close-kata-modal" onclick="closeSparringModal()">&times;</button>
+    <h3>Study Sparring Methods</h3>
+    <div style="text-align: left; color: var(--muted-light); line-height: 1.8;">
+      <h4 style="color: var(--gold); margin: 20px 0 10px;">Randori (Free Practice)</h4>
+      <p>Unrestricted sparring practice where practitioners apply techniques in a fluid, spontaneous manner. Develops timing, distancing, and adaptability against unpredictable attacks.</p>
+      
+      <h4 style="color: var(--gold); margin: 20px 0 10px;">Sparring Progression</h4>
+      <ul style="padding-left: 20px; margin-bottom: 20px;">
+        <li><strong>Kihon Kumite</strong>: Basic pre-arranged sparring with single techniques</li>
+        <li><strong>Jiyu Ippon Kumite</strong>: Semi-free sparring with single committed attacks</li>
+        <li><strong>Jiyu Kumite</strong>: Free sparring with controlled contact</li>
+        <li><strong>Randori</strong>: Complete free practice with emphasis on flow and continuous movement</li>
+      </ul>
+      
+      <h4 style="color: var(--gold); margin: 20px 0 10px;">Training Principles</h4>
+      <p>Sparring practice follows the concept of "Kakie" (pushing hands) - maintaining contact to sense the opponent's intentions. Emphasis is placed on proper breathing, posture maintenance, and controlled techniques rather than competition.</p>
+    </div>
+    <div style="text-align: center; margin-top: 25px;">
+      <button onclick="closeSparringModal()">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<!-- EQUIPMENT MODAL -->
+<div id="equipmentModal" class="kata-modal">
+  <div class="kata-modal-content">
+    <button class="close-kata-modal" onclick="closeEquipmentModal()">&times;</button>
+    <h3>Traditional Training Equipment</h3>
+    <div style="text-align: left; color: var(--muted-light); line-height: 1.8;">
+      <h4 style="color: var(--gold); margin: 20px 0 10px;">Hojo Undo (Supplementary Training)</h4>
+      <p>Traditional Okinawan equipment designed to develop strength, power, and conditioning specific to karate techniques.</p>
+      
+      <h4 style="color: var(--gold); margin: 20px 0 10px;">Core Equipment</h4>
+      <ul style="padding-left: 20px; margin-bottom: 20px;">
+        <li><strong>Tan (Barbell)</strong>: Used for developing striking power, grip strength, and shoulder stability. Typically made of stone or concrete with wooden handles.</li>
+        <li><strong>Makiwara</strong>: Striking post for conditioning fists and developing proper alignment</li>
+        <li><strong>Chiishi</strong>: Stone lever for wrist and forearm strength</li>
+        <li><strong>Nigiri Game</strong>: Gripping jars filled with sand or rice for finger strength</li>
+        <li><strong>Kongoken</strong>: Iron ring for developing whole-body strength</li>
+        <li><strong>Tetsu-geta</strong>: Iron sandals for leg strength and stability</li>
+      </ul>
+      
+      <h4 style="color: var(--gold); margin: 20px 0 10px;">Training Philosophy</h4>
+      <p>Traditional equipment training emphasizes functional strength that translates directly to karate techniques. The focus is on developing "muchimi" - a sticky, heavy power that comes from proper body mechanics rather than brute force.</p>
+    </div>
+    <div style="text-align: center; margin-top: 25px;">
+      <button onclick="closeEquipmentModal()">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<!-- CEREMONY -->
+<div id="ceremony">
+  <div class="ceremony-box">
+    <h1 style="font-size: 42px; margin-bottom: 20px;">🥋 初段 (SHODAN)</h1>
+    <p style="font-size: 20px; color: var(--gold); margin-bottom: 10px;">Black Belt Attained</p>
+    <p style="color: var(--muted-light); margin-bottom: 30px; line-height: 1.6;">"The black belt is not a mark of an end, but a symbol of a beginning. It signifies that you are now ready to truly begin learning."</p>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 30px;">空手道は一生の道 - Karate-do is a lifelong journey</p>
+    <button onclick="closeCeremony()"><i class="fas fa-hands"></i> BOW & CONTINUE JOURNEY</button>
+  </div>
+</div>
+
+<script>
+/* DATA */
+const sanctuaries = [
+  {
+    name: "Hall of Origins",
+    content: `<div class='section'><h3>What is Karate-do?</h3><p>Kara = empty/free like air/infinite like sky. Te = hand. Do = way. Literally "the way of the empty hand." It is three concentric circles: outer (physical), middle (art), inner (spirit). The goal is to develop the spirit.</p></div>
+              <div class='section'><h3>Basic History</h3><p>Originated from India through China to Okinawa. Bodhidharma at Shaolin Temple developed exercises for monks' health, evolving into Shorinji Kempo. Brought to Okinawa where it became "Te" (hand).</p></div>
+              <div class='section'><h3>Dojo Etiquette Basics</h3><p>Bow when entering/leaving dojo. Remove shoes. Respect seniors. Listen carefully to sensei. Keep uniform clean. Short nails to prevent injury.</p></div>
+             
+              <div class="quiz-section">
+                <h3><i class="fas fa-brain"></i> White Belt Quiz</h3>
+                <div class="quiz-question">
+                  <h4>1. What does "Karate-do" literally translate to?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="0" data-a="0">The way of the fighting hand</div>
+                    <div class="quiz-option" data-q="0" data-a="1">The way of the empty hand</div>
+                    <div class="quiz-option" data-q="0" data-a="2">The art of self-defense</div>
+                    <div class="quiz-option" data-q="0" data-a="3">The path of discipline</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question">
+                  <h4>2. Where did Karate originate?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="1" data-a="0">Japan</div>
+                    <div class="quiz-option" data-q="1" data-a="1">China through Okinawa</div>
+                    <div class="quiz-option" data-q="1" data-a="2">Korea</div>
+                    <div class="quiz-option" data-q="1" data-a="3">Thailand</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <button class="submit-quiz-btn" data-sanctuary="0"><i class="fas fa-paper-plane"></i> SUBMIT QUIZ</button>
+              </div>
+             
+              <div class="fun-qa-section">
+                <h3><i class="fas fa-lightbulb"></i> Fun Q&A</h3>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> Why do we bow when entering the dojo?</div>
+                  <div class="fun-qa-answer">Bowing shows respect to the training space, the sensei (teacher), fellow students, and the art itself. It signifies leaving your ego at the door and being ready to learn.</div>
+                </div>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> What's the most important thing for a white belt?</div>
+                  <div class="fun-qa-answer">Having an open mind! As a beginner, you're like an empty cup - ready to be filled with knowledge. Don't worry about perfection; focus on learning and showing up consistently.</div>
+                </div>
+              </div>
+             
+              <button onclick="completeSanctuary(0)"><i class="fas fa-book"></i> COMPLETE WHITE BELT STUDY</button>`
+  },
+  {
+    name: "Foundation Chamber",
+    content: `<div class='section'><h3>Basic Stances</h3><p>Musubi Dachi (heels together, toes out), Heiko Dachi (parallel feet), Hachiji Dachi (feet at 45°), Shiko Dachi (wide stance, toes out), Zenkutsu Dachi (front stance - 70% weight front).</p></div>
+              <div class='section'><h3>Basic Punches (Sugi Waza)</h3><p>Seiken (forefist) formation: roll fingertips into palm, thumb tight. Jodan (face), Chudan (stomach), Gedan (groin) punches. Oi Zuki (lunge punch).</p></div>
+              <div class='section'><h3>Introduction to Breathing</h3><p>Inhale through nose, exhale through mouth. Basic Kiai (spirit shout) from abdomen, not throat. Develop awareness of breath during movement.</p></div>
+             
+              <div class="quiz-section">
+                <h3><i class="fas fa-brain"></i> Yellow Belt Quiz</h3>
+                <div class="quiz-question">
+                  <h4>1. In Zenkutsu Dachi (front stance), where should most of your weight be?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="0" data-a="0">Evenly distributed</div>
+                    <div class="quiz-option" data-q="0" data-a="1">70% on front leg</div>
+                    <div class="quiz-option" data-q="0" data-a="2">100% on back leg</div>
+                    <div class="quiz-option" data-q="0" data-a="3">90% on front leg</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question">
+                  <h4>2. What is "Seiken" in karate terminology?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="1" data-a="0">A type of kick</div>
+                    <div class="quiz-option" data-q="1" data-a="1">Proper fist formation</div>
+                    <div class="quiz-option" data-q="1" data-a="2">A breathing technique</div>
+                    <div class="quiz-option" data-q="1" data-a="3">A bowing ritual</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <button class="submit-quiz-btn" data-sanctuary="1"><i class="fas fa-paper-plane"></i> SUBMIT QUIZ</button>
+              </div>
+             
+              <div class="fun-qa-section">
+                <h3><i class="fas fa-lightbulb"></i> Fun Q&A</h3>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> Why does my thumb hurt when making a proper fist?</div>
+                  <div class="fun-qa-answer">You're probably curling your thumb over your fingers correctly! The proper Seiken fist has the thumb tightly locking the fingers in place. The discomfort will fade as your hands adapt - it's a sign you're doing it right!</div>
+                </div>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> What's the funniest beginner mistake you've seen?</div>
+                  <div class="fun-qa-answer">New students often hold their breath while punching or kicking, then gasp for air afterwards! Remember: breathe out on exertion, breathe in on recovery. Your kiai should come from your hara (center), not your throat!</div>
+                </div>
+              </div>
+             
+              <button onclick="completeSanctuary(1)"><i class="fas fa-dumbbell"></i> COMPLETE YELLOW BELT TRAINING</button>`
+  },
+  {
+    name: "Movement Dojo",
+    content: `<div class='section'><h3>Blocking Basics (Uke Waza)</h3><p>Jodan Age Uke (rising block), Chudan Uchi Uke (inside block), Gedan Barai (downward block). Blocks with forearm, not wrist. Maintain strong stance while blocking.</p></div>
+              <div class='section'><h3>Front Kicks (Mae Geri)</h3><p>Gedan (groin), Chudan (stomach), Jodan (face). Use ball of foot (Josokutei) or instep (Ashikubi). Keage (snap kick) vs Kekomi (thrust kick).</p></div>
+              <div class='section'><h3>Dojo Kun Introduction</h3><p>Five precepts: 1. Seek perfection of character. 2. Be faithful. 3. Endeavor. 4. Respect others. 5. Refrain from violent behavior. Begin to understand their meaning.</p></div>
+             
+              <div class="quiz-section">
+                <h3><i class="fas fa-brain"></i> Orange Belt Quiz</h3>
+                <div class="quiz-question">
+                  <h4>1. Which part of your body should make contact during Jodan Age Uke (rising block)?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="0" data-a="0">Wrist</div>
+                    <div class="quiz-option" data-q="0" data-a="1">Forearm</div>
+                    <div class="quiz-option" data-q="0" data-a="2">Elbow</div>
+                    <div class="quiz-option" data-q="0" data-a="3">Fist</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question">
+                  <h4>2. What is the first precept of the Dojo Kun?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="1" data-a="0">Be faithful</div>
+                    <div class="quiz-option" data-q="1" data-a="1">Seek perfection of character</div>
+                    <div class="quiz-option" data-q="1" data-a="2">Endeavor</div>
+                    <div class="quiz-option" data-q="1" data-a="3">Respect others</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <button class="submit-quiz-btn" data-sanctuary="2"><i class="fas fa-paper-plane"></i> SUBMIT QUIZ</button>
+              </div>
+             
+              <div class="fun-qa-section">
+                <h3><i class="fas fa-lightbulb"></i> Fun Q&A</h3>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> Why do we kick with the ball of the foot instead of the toes?</div>
+                  <div class="fun-qa-answer">Three reasons: 1) The ball of the foot is much stronger than delicate toes. 2) It creates a smaller, more penetrating impact point. 3) You're less likely to break your toes! Trust us - broken toes are no fun.</div>
+                </div>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> What's the most common blocking mistake beginners make?</div>
+                  <div class="fun-qa-answer">"Chicken wing" arms! Beginners often block with elbows flared out instead of keeping them close to the body. This creates openings and weakens the block. Keep those elbows tucked!</div>
+                </div>
+              </div>
+             
+              <button onclick="completeSanctuary(2)"><i class="fas fa-yin-yang"></i> COMPLETE ORANGE BELT STUDY</button>`
+  },
+  {
+    name: "Technical Laboratory",
+    content: `<div class='section'><h3>Circular Techniques</h3><p>Mawashi Zuki (roundhouse punch), Mawashi Geri (roundhouse kick). Circular blocks: Kake Uke (hooking block), Nagashi Uke (flowing block). Introduction to timing and rhythm.</p></div>
+              <div class='section'><h3>Side Kicks & Elbows</h3><p>Yoko Geri (side kick) with Sokuto (edge of foot). Hiji Ate (elbow strikes): Mae (front), Yoko (side), Otoshi (downward). Close-range fighting concepts.</p></div>
+              <div class='section'><h3>Ki Development</h3><p>Ki = life energy. Located at hara (below navel). Kiai materializes Ki through concentration of mind/body with proper breathing. Develop awareness of energy flow.</p></div>
+             
+              <div class="quiz-section">
+                <h3><i class="fas fa-brain"></i> Light Blue Belt Quiz</h3>
+                <div class="quiz-question">
+                  <h4>1. Which part of the foot is used for Yoko Geri (side kick)?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="0" data-a="0">Ball of the foot</div>
+                    <div class="quiz-option" data-q="0" data-a="1">Instep</div>
+                    <div class="quiz-option" data-q="0" data-a="2">Edge of the foot (Sokuto)</div>
+                    <div class="quiz-option" data-q="0" data-a="3">Heel</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question">
+                  <h4>2. Where is the "hara" or center of Ki located in the body?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="1" data-a="0">In the chest</div>
+                    <div class="quiz-option" data-q="1" data-a="1">Below the navel</div>
+                    <div class="quiz-option" data-q="1" data-a="2">In the forehead</div>
+                    <div class="quiz-option" data-q="1" data-a="3">In the hands</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <button class="submit-quiz-btn" data-sanctuary="3"><i class="fas fa-paper-plane"></i> SUBMIT QUIZ</button>
+              </div>
+             
+              <div class="fun-qa-section">
+                <h3><i class="fas fa-lightbulb"></i> Fun Q&A</h3>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> Why do karate practitioners sometimes sound like they're constipated when they kiai?</div>
+                  <div class="fun-qa-answer">That's the sound of proper abdominal contraction! A true kiai comes from deep in the hara (center), not the throat. It should feel like you're pushing energy from your core through your technique. Yes, it might sound funny at first!</div>
+                </div>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> What's the difference between "Keage" and "Kekomi" kicks?</div>
+                  <div class="fun-qa-answer">Keage means "snap kick" - fast in and out like a whip. Kekomi means "thrust kick" - penetrating and powerful like a piston. Keage for speed, Kekomi for power. Try both and feel the difference!</div>
+                </div>
+              </div>
+             
+              <button onclick="completeSanctuary(3)"><i class="fas fa-spa"></i> COMPLETE LIGHT BLUE BELT STUDY</button>`
+  },
+  {
+    name: "Strategy Arena",
+    content: `<div class='section'><h3>Combination Techniques</h3><p>Basic combinations: block-punch, punch-kick, kick-punch. Introduction to Maai (fighting distance). Learn to judge distance for effective techniques.</p></div>
+              <div class='section'><h3>Vital Points (Kyusho)</h3><p>Basic targets: Jinchu (upper lip), Kagaku (chin), Kyokotsu (sternum), Ganka (ribs below nipples). Natural weapons: Seiken, Shuto, Sokuto, Hiji.</p></div>
+              <div class='section'><h3>Ippon Kumite</h3><p>Basic prearranged sparring: one attack, one block, one counter. Develop timing, distancing, control. Learn Yakusoku Kumite basics.</p></div>
+             
+              <div class="quiz-section">
+                <h3><i class="fas fa-brain"></i> Dark Blue Belt Quiz</h3>
+                <div class="quiz-question">
+                  <h4>1. What does "Maai" refer to in karate?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="0" data-a="0">Breathing rhythm</div>
+                    <div class="quiz-option" data-q="0" data-a="1">Fighting distance</div>
+                    <div class="quiz-option" data-q="0" data-a="2">Mental focus</div>
+                    <div class="quiz-option" data-q="0" data-a="3">Stance width</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question">
+                  <h4>2. Which of these is NOT a natural weapon in karate?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="1" data-a="0">Seiken (forefist)</div>
+                    <div class="quiz-option" data-q="1" data-a="1">Shuto (knife hand)</div>
+                    <div class="quiz-option" data-q="1" data-a="2">Sokuto (foot edge)</div>
+                    <div class="quiz-option" data-q="1" data-a="3">Katana (sword)</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <button class="submit-quiz-btn" data-sanctuary="4"><i class="fas fa-paper-plane"></i> SUBMIT QUIZ</button>
+              </div>
+             
+              <div class="fun-qa-section">
+                <h3><i class="fas fa-lightbulb"></i> Fun Q&A</h3>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> Why do we practice hitting specific vital points?</div>
+                  <div class="fun-qa-answer">Karate was developed for self-defense against larger, stronger opponents. Knowing vital points allows a smaller person to defend effectively. But remember: "Karate ni sente nashi" - there is no first attack in karate. These are for defense only!</div>
+                </div>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> What's the most common mistake in combination techniques?</div>
+                  <div class="fun-qa-answer">"Telegraphing" - showing your next move before you do it! Beginners often look where they're going to kick or drop their other hand before punching. Keep your movements hidden and unpredictable!</div>
+                </div>
+              </div>
+             
+              <button onclick="completeSanctuary(4)"><i class="fas fa-gavel"></i> COMPLETE DARK BLUE BELT STUDY</button>`
+  },
+  {
+    name: "Kata Repository",
+    content: `<div class='section'><h3>Introduction to Kata</h3><p>Kata = formal exercise sequence. Contains fighting techniques, strategies, principles. Originally secret, transmitted only to trusted students. Begin learning basic katas: Taikyoku, Gekisai Dai Ichi.</p></div>
+              <div class='section'><h3>Hojo Undo Basics</h3><p>Supplementary training: Makiwara (stripping post) for conditioning fists. Basic body conditioning: forearm to forearm, shin to shin. Introduction to Chiishi (stone lever).</p></div>
+              <div class='section'><h3>Breathing Development</h3><p>Ibuki breathing for power. Inhalation through nose, hold in tanden, exhalation through mouth with tension. Begin Sanchin breathing patterns.</p></div>
+             
+              <div class="quiz-section">
+                <h3><i class="fas fa-brain"></i> Green Belt Quiz</h3>
+                <div class="quiz-question">
+                  <h4>1. What is the primary purpose of kata practice?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="0" data-a="0">To look impressive in demonstrations</div>
+                    <div class="quiz-option" data-q="0" data-a="1">To memorize fighting techniques and principles</div>
+                    <div class="quiz-option" data-q="0" data-a="2">To get a good workout</div>
+                    <div class="quiz-option" data-q="0" data-a="3">To prepare for tournaments</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question">
+                  <h4>2. What is the traditional Okinawan striking post called?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="1" data-a="0">Heavy bag</div>
+                    <div class="quiz-option" data-q="1" data-a="1">Makiwara</div>
+                    <div class="quiz-option" data-q="1" data-a="2">Punching board</div>
+                    <div class="quiz-option" data-q="1" data-a="3">Training dummy</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <button class="submit-quiz-btn" data-sanctuary="5"><i class="fas fa-paper-plane"></i> SUBMIT QUIZ</button>
+              </div>
+             
+              <div class="fun-qa-section">
+                <h3><i class="fas fa-lightbulb"></i> Fun Q&A</h3>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> Why do katas have such strange, sometimes impractical-looking movements?</div>
+                  <div class="fun-qa-answer">Great question! Many kata movements have hidden applications called "bunkai." What looks like a simple block might be a joint lock, throw, or pressure point strike. The surface movement is just the tip of the iceberg!</div>
+                </div>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> Does hitting the makiwara really make your knuckles stronger?</div>
+                  <div class="fun-qa-answer">Yes, but it's a gradual process! The makiwara conditions not just your knuckles, but your wrist alignment, bone density, and striking mechanics. Start light and build up slowly - no one wants "makiwara knuckle" (swollen, painful joints from overdoing it!).</div>
+                </div>
+              </div>
+             
+              <button onclick="completeSanctuary(5)"><i class="fas fa-brain"></i> COMPLETE GREEN BELT STUDY</button>`
+  },
+  {
+    name: "Philosophy Library",
+    content: `<div class='section'><h3>Goju-Ryu Philosophy</h3><p>Go = hard, Ju = soft, Ryu = style. Based on Yin-Yang balance. Excessive hardness breaks, excessive softness yields. Balance between tension/relaxation, fast/slow, inhale/exhale.</p></div>
+              <div class='section'><h3>Intermediate Katas</h3><p>Saifa (tearing), Seiyunchin (marching far quietly). Study bunkai (applications) of movements. Understand each technique's practical use in self-defense.</p></div>
+              <div class='section'><h3>Mushin (No-Mind)</h3><p>Beginner's mind free of preconceptions. Mind empty of thought yet acutely aware. Not stopping at any one point, free to respond to any situation.</p></div>
+             
+              <div class="quiz-section">
+                <h3><i class="fas fa-brain"></i> Purple Belt Quiz</h3>
+                <div class="quiz-question">
+                  <h4>1. What does "Goju-Ryu" literally translate to?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="0" data-a="0">Hard-Soft Style</div>
+                    <div class="quiz-option" data-q="0" data-a="1">Strong Fist Way</div>
+                    <div class="quiz-option" data-q="0" data-a="2">Dragon-Tiger School</div>
+                    <div class="quiz-option" data-q="0" data-a="3">Empty Hand Path</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question">
+                  <h4>2. What is "Mushin" in karate philosophy?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="1" data-a="0">Aggressive fighting spirit</div>
+                    <div class="quiz-option" data-q="1" data-a="1">No-mind, empty consciousness</div>
+                    <div class="quiz-option" data-q="1" data-a="2">Physical strength training</div>
+                    <div class="quiz-option" data-q="1" data-a="3">Meditative breathing</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <button class="submit-quiz-btn" data-sanctuary="6"><i class="fas fa-paper-plane"></i> SUBMIT QUIZ</button>
+              </div>
+             
+              <div class="fun-qa-section">
+                <h3><i class="fas fa-lightbulb"></i> Fun Q&A</h3>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> Why is "balance" so important in Goju-Ryu philosophy?</div>
+                  <div class="fun-qa-answer">Think of a willow tree in a storm: rigid oak branches break, but flexible willow branches bend and survive. Goju-Ryu teaches us to be hard like oak when needed, soft like willow when appropriate. Life, like fighting, requires both strength and adaptability!</div>
+                </div>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> What's the funniest misunderstanding about "no-mind" (Mushin)?</div>
+                  <div class="fun-qa-answer">Some beginners think it means "empty head" - like not thinking at all! Actually, Mushin is hyper-awareness without overthinking. It's like when you catch a ball without calculating trajectory - your body just knows. Don't try to not think; just let your training take over!</div>
+                </div>
+              </div>
+             
+              <button onclick="completeSanctuary(6)"><i class="fas fa-scroll"></i> COMPLETE PURPLE BELT STUDY</button>`
+  },
+  {
+    name: "Combat Gymnasium",
+    content: `<div class='section'><h3>Advanced Kumite</h3><p>Jiyu Ippon Kumite (semi-free sparring). Sandai Gi (three-step sparring). Randori (free practice fighting). Develop reflexes, timing, strategy. Learn to read opponent's intentions.</p></div>
+              <div class='section'><h3>Weapon Introduction</h3><p>Basic Okinawan Kobudo: Bo (staff), Sai (fork), Nunchaku (flails). Historical development from farm tools. Relationship to empty-hand techniques.</p></div>
+              <div class='section'><h3>Kuzushi (Balance Breaking)</h3><p>Creating opportunities: feints, combinations, using opponent's motion. Actively opening guard or passively using opponent's movement. Timing: attack when opponent moves, attacks, or inhales.</p></div>
+             
+              <div class="quiz-section">
+                <h3><i class="fas fa-brain"></i> Brown Belt Quiz</h3>
+                <div class="quiz-question">
+                  <h4>1. What is "Kuzushi" in martial arts?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="0" data-a="0">Breaking boards</div>
+                    <div class="quiz-option" data-q="0" data-a="1">Balance breaking</div>
+                    <div class="quiz-option" data-q="0" data-a="2">Speed training</div>
+                    <div class="quiz-option" data-q="0" data-a="3">Strength conditioning</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question">
+                  <h4>2. Which Okinawan weapon was originally a farming tool?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="1" data-a="0">All of them</div>
+                    <div class="quiz-option" data-q="1" data-a="1">Nunchaku (rice flail)</div>
+                    <div class="quiz-option" data-q="1" data-a="2">Bo (staff)</div>
+                    <div class="quiz-option" data-q="1" data-a="3">Sai (fork)</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <button class="submit-quiz-btn" data-sanctuary="7"><i class="fas fa-paper-plane"></i> SUBMIT QUIZ</button>
+              </div>
+             
+              <div class="fun-qa-section">
+                <h3><i class="fas fa-lightbulb"></i> Fun Q&A</h3>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> Why do we practice with weapons if karate means "empty hand"?</div>
+                  <div class="fun-qa-answer">Great philosophical question! Weapons training teaches principles that apply to empty-hand techniques: distance, timing, angles, and flow. Also, understanding weapons helps you defend against them. Plus, the bo staff was originally a walking stick - very practical!</div>
+                </div>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> What's the most surprising thing about sparring at advanced levels?</div>
+                  <div class="fun-qa-answer">It gets slower and more deliberate! Beginners think black belts spar at lightning speed, but actually, advanced practitioners move economically and read each other. It's more like chess than a bar fight - strategy over brute force!</div>
+                </div>
+              </div>
+             
+              <button onclick="completeSanctuary(7)"><i class="fas fa-shield-alt"></i> COMPLETE BROWN BELT STUDY</button>`
+  },
+  {
+    name: "Master's Atelier",
+    content: `<div class='section'><h3>Advanced Katas</h3><p>Sanseru (36 techniques), Seipai (snake), Kururunfa (holding ground). Deep study of bunkai. Multiple applications per movement. Understand hard/soft transitions within kata.</p></div>
+              <div class='section'><h3>Teaching Methodology</h3><p>How to instruct beginners. Correcting stances, techniques, breathing. Understanding different learning styles. Developing patience and observation skills.</p></div>
+              <div class='section'><h3>History & Lineage</h3><p>Complete lineage: Higaonna Kanryo → Miyagi Chojun → Yagi Meitoku. Development in Okinawa vs Japan. Different styles: Shorin-Ryu, Uechi-Ryu, Shotokan, Wado-Ryu, Shito-Ryu.</p></div>
+             
+              <div class="quiz-section">
+                <h3><i class="fas fa-brain"></i> Brown Belt 1 Quiz</h3>
+                <div class="quiz-question">
+                  <h4>1. What does the kata "Sanseru" refer to numerically?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="0" data-a="0">108 techniques</div>
+                    <div class="quiz-option" data-q="0" data-a="1">36 techniques</div>
+                    <div class="quiz-option" data-q="0" data-a="2">18 techniques</div>
+                    <div class="quiz-option" data-q="0" data-a="3">72 techniques</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question">
+                  <h4>2. Who was Chojun Miyagi's primary teacher?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="1" data-a="0">Meitoku Yagi</div>
+                    <div class="quiz-option" data-q="1" data-a="1">Kanryo Higaonna</div>
+                    <div class="quiz-option" data-q="1" data-a="2">Gichin Funakoshi</div>
+                    <div class="quiz-option" data-q="1" data-a="3">Sokon Matsumura</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <button class="submit-quiz-btn" data-sanctuary="8"><i class="fas fa-paper-plane"></i> SUBMIT QUIZ</button>
+              </div>
+             
+              <div class="fun-qa-section">
+                <h3><i class="fas fa-lightbulb"></i> Fun Q&A</h3>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> Why do different karate styles have the same katas with different movements?</div>
+                  <div class="fun-qa-answer">Like telephone game through generations! Katas were often taught secretly, with slight variations. Also, different masters emphasized different applications. It's not that one is "wrong" - they're different interpretations of the same principles. Karate is living tradition, not frozen in time!</div>
+                </div>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-question-circle"></i> What's the hardest part about teaching beginners?</div>
+                  <div class="fun-qa-answer">Unlearning what you take for granted! As a black belt, proper stance feels natural. You forget how awkward it felt at first. Teaching requires empathy - remembering your own struggles and having patience. The best teachers are perpetual students themselves!</div>
+                </div>
+              </div>
+             
+              <button onclick="completeSanctuary(8)"><i class="fas fa-crown"></i> COMPLETE BROWN BELT 1 STUDY</button>`
+  },
+  {
+    name: "Black Belt Sanctuary",
+    content: `<div class='section'><h3>Supreme Katas</h3><p>Suparinpei (108 techniques) - highest Goju-Ryu kata. Tensho (turning palms) - advanced breathing form. Complete understanding of all movements, applications, principles contained within.</p></div>
+              <div class='section'><h3>Complete Philosophy</h3><p>"Karate ni sente nashi" - no first attack. "The black belt is not a mark of an end, but a symbol of a beginning." Gi shin fuki: technique and mind inseparable. Mushin no kokoro: detached mind.</p></div>
+              <div class='section'><h3>Shodan Responsibility</h3><p>Now ready to truly begin learning. Responsibility to preserve art authentically while adapting to modern times. Teaching next generation while continuing own development. Lifelong journey begins.</p></div>
+             
+              <div class="quiz-section">
+                <h3><i class="fas fa-brain"></i> Brown Belt 2 Quiz</h3>
+                <div class="quiz-question">
+                  <h4>1. What does "Suparinpei" refer to numerically?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="0" data-a="0">36 techniques</div>
+                    <div class="quiz-option" data-q="0" data-a="1">108 techniques</div>
+                    <div class="quiz-option" data-q="0" data-a="2">72 techniques</div>
+                    <div class="quiz-option" data-q="0" data-a="3">18 techniques</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question">
+                  <h4>2. What is the meaning of "Karate ni sente nashi"?</h4>
+                  <div class="quiz-options">
+                    <div class="quiz-option" data-q="1" data-a="0">Strike first, ask questions later</div>
+                    <div class="quiz-option" data-q="1" data-a="1">There is no first attack in karate</div>
+                    <div class="quiz-option" data-q="1" data-a="2">Attack with full power</div>
+                    <div class="quiz-option" data-q="1" data-a="3">Defend at all costs</div>
+                  </div>
+                  <div class="quiz-feedback"></div>
+                </div>
+                <button class="submit-quiz-btn" data-sanctuary="9"><i class="fas fa-paper-plane"></i> SUBMIT QUIZ</button>
+              </div>
+             
+              <div class="fun-qa-section">
+                <h3><i class="fas fa-lightbulb"></i> Wisdom from the Masters</h3>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-quote-left"></i> What does a black belt really mean?</div>
+                  <div class="fun-qa-answer">"A black belt is a white belt who never quit." - Unknown<br><br>"The black belt is not a mark of an end, but a symbol of a beginning. It signifies that you are now ready to truly begin learning." - Traditional saying<br><br>You've mastered the basics. Now the real journey begins!</div>
+                </div>
+                <div class="fun-qa-item" onclick="toggleQA(this)">
+                  <div class="fun-qa-question"><i class="fas fa-quote-left"></i> What's the most important lesson from your journey?</div>
+                  <div class="fun-qa-answer">Karate isn't about fighting others; it's about fighting your own limitations. The dojo is a mirror - it shows you your impatience, your ego, your fear. Conquer those, and you've won the real battle. The techniques are just the vehicle for self-discovery.</div>
+                </div>
+              </div>
+             
+              <button onclick="unlockBlackBelt()"><i class="fas fa-medal"></i> BEGIN SHODAN CEREMONY</button>`
+  }
+];
+
+// Quiz answers for each sanctuary
+const quizAnswers = [
+  [1, 1], // Sanctuary 0: Hall of Origins - [q1 correct index, q2 correct index]
+  [1, 1], // Sanctuary 1: Foundation Chamber
+  [1, 1], // Sanctuary 2: Movement Dojo
+  [2, 1], // Sanctuary 3: Technical Laboratory
+  [1, 3], // Sanctuary 4: Strategy Arena
+  [1, 1], // Sanctuary 5: Kata Repository
+  [0, 1], // Sanctuary 6: Philosophy Library
+  [1, 0], // Sanctuary 7: Combat Gymnasium
+  [1, 1], // Sanctuary 8: Master's Atelier
+  [1, 1]  // Sanctuary 9: Black Belt Sanctuary
+];
+
+// Quiz feedback explanations
+const quizFeedback = [
+  // Sanctuary 0
+  [
+    "Correct! 'Karate-do' literally means 'the way of the empty hand.' The 'do' signifies it's a path for personal development, not just fighting techniques.",
+    "Correct! Karate originated in India, traveled through China, and developed in Okinawa before spreading to Japan and the world."
+  ],
+  // Sanctuary 1
+  [
+    "Correct! In Zenkutsu Dachi (front stance), approximately 70% of your weight should be on your front leg, 30% on the back leg for stability and power generation.",
+    "Correct! 'Seiken' refers to the proper fist formation in karate, with fingers rolled tightly into the palm and the thumb locking them in place."
+  ],
+  // Sanctuary 2
+  [
+    "Correct! Blocks should make contact with the forearm, not the wrist or hand. The forearm bones are much stronger and less likely to be injured.",
+    "Correct! The first precept of the Dojo Kun is 'Seek perfection of character.' All other precepts flow from this fundamental principle."
+  ],
+  // Sanctuary 3
+  [
+    "Correct! Yoko Geri (side kick) uses the edge of the foot (Sokuto). This creates a strong, penetrating weapon for close-range attacks.",
+    "Correct! The 'hara' or center of Ki is located about two finger-widths below the navel. This is your center of gravity and power generation point."
+  ],
+  // Sanctuary 4
+  [
+    "Correct! 'Maai' refers to the fighting distance - the space between you and your opponent. Controlling maai is crucial for effective offense and defense.",
+    "Correct! The katana is a Japanese sword, not a natural weapon of the human body. Karate emphasizes using our natural weapons: hands, feet, elbows, knees."
+  ],
+  // Sanctuary 5
+  [
+    "Correct! Kata were originally created to preserve and transmit fighting techniques, strategies, and principles from master to student in a systematic way.",
+    "Correct! The makiwara is the traditional Okinawan striking post used for conditioning the fists and developing proper striking mechanics."
+  ],
+  // Sanctuary 6
+  [
+    "Correct! 'Goju-Ryu' literally translates to 'Hard-Soft Style,' representing the balance between hard (Go) and soft (Ju) techniques and philosophies.",
+    "Correct! 'Mushin' means 'no-mind' - a state of empty consciousness where you act without hesitation or overthinking, allowing your training to flow naturally."
+  ],
+  // Sanctuary 7
+  [
+    "Correct! 'Kuzushi' is the principle of breaking your opponent's balance before executing a technique. This makes techniques more effective with less force.",
+    "Correct! All traditional Okinawan weapons were adapted from farming tools. The nunchaku was a rice flail, the bo a carrying pole, and the sai a tool for planting."
+  ],
+  // Sanctuary 8
+  [
+    "Correct! 'Sanseru' means '36' in Japanese, referring to the 36 techniques or movements contained within this advanced kata.",
+    "Correct! Chojun Miyagi, founder of Goju-Ryu, studied under Kanryo Higaonna, who brought Chinese martial arts knowledge back to Okinawa."
+  ],
+  // Sanctuary 9
+  [
+    "Correct! 'Suparinpei' means '108' in Japanese, representing the 108 techniques in this supreme kata. The number 108 has Buddhist significance.",
+    "Correct! 'Karate ni sente nashi' means 'There is no first attack in karate.' This embodies the defensive, non-aggressive philosophy of true karate-do."
+  ]
+];
+
+const kataLinks = {
+  'sanchin': 'https://www.youtube.com/watch?v=PPAEMOnhEJY',
+  'gekisai-dai-ichi': 'https://www.youtube.com/watch?v=YtcRO7zceIg&list=PL278277F9281C451B',
+  'gekisai-dai-ni': 'https://www.youtube.com/watch?v=7ATBdHJcq-g&list=PL278277F9281C451B&index=2',
+  'saifa': 'https://www.youtube.com/watch?v=oKj5drvygec&list=PL278277F9281C451B&index=3',
+  'shisochin': 'https://www.youtube.com/watch?v=GyRyR3pd7FI&list=PL278277F9281C451B&index=5',
+  'seiunchin': 'https://www.youtube.com/watch?v=_52ye5xADGA&list=PL278277F9281C451B&index=4',
+  'sanseru': 'https://www.youtube.com/watch?v=tCrXO9MQJyk&list=PL278277F9281C451B&index=6',
+  'seipai': 'https://www.youtube.com/watch?v=rBvK4eSHReY&list=PL278277F9281C451B&index=7',
+  'sesan': 'https://www.youtube.com/watch?v=jXNjK_HuV1Y&list=PL278277F9281C451B&index=8',
+  'kururunfa': 'https://www.youtube.com/watch?v=3HGX7L6VIcU&list=PL278277F9281C451B&index=9',
+  'superimpei': 'https://www.youtube.com/watch?v=example10',
+  'tensho': 'https://www.youtube.com/watch?v=4W8yV85HuHI&list=PL278277F9281C451B&index=11'
+};
+
+function openKataLink(kataName) {
+  const url = kataLinks[kataName];
+  if (url) {
+    window.open(url, '_blank');
+    let userData = getUserData();
+    userData.dojoHours += 0.1;
+    saveUserData(userData);
+    updateUserStats();
+  }
+}
+
+const belts = ["WHITE", "YELLOW", "ORANGE", "LIGHT BLUE", "DARK BLUE", "GREEN", "PURPLE", "BROWN", "BROWN 1", "BROWN 2", "BLACK"];
+let unlocked = Number(localStorage.getItem("unlocked")) || 1;
+let active = null;
+let currentPage = "dashboard";
+
+// Track quiz scores
+let quizScores = JSON.parse(localStorage.getItem("quizScores")) || Array(sanctuaries.length).fill(0);
+
+/* USER MANAGEMENT - SIMPLIFIED */
+let currentUser = localStorage.getItem("currentUser") || "Sensei";
+let userAccounts = JSON.parse(localStorage.getItem("userAccounts")) || {
+  "sensei": { password: "karate", progress: 1 }
+};
+
+/* USER DATA - Now stored per user */
+function getUserData() {
+  const userData = JSON.parse(localStorage.getItem(`karateData_${currentUser}`)) || {
+    techniques: 0,
+    trainingDays: 0,
+    kataCompleted: 0,
+    dojoHours: 0,
+    journalEntries: [],
+    achievements: [],
+    quizMastery: 0,
+    completedSanctuaries: 0
+  };
+  return userData;
+}
+
+function saveUserData(userData) {
+  localStorage.setItem(`karateData_${currentUser}`, JSON.stringify(userData));
+}
+
+/* ACHIEVEMENTS LIST */
+const achievementList = [
+  { name: "First Steps", desc: "Complete your first training session", icon: "fa-shoe-prints", earned: false },
+  { name: "Kihon Master", desc: "Master 25 basic techniques", icon: "fa-fist-raised", earned: false },
+  { name: "Kata Initiate", desc: "Learn your first kata", icon: "fa-yin-yang", earned: false },
+  { name: "Discipline", desc: "Train for 7 consecutive days", icon: "fa-calendar-check", earned: false },
+  { name: "Warrior Spirit", desc: "Complete 100 dojo hours", icon: "fa-clock", earned: false },
+  { name: "Quiz Master", desc: "Score 100% on 5 quizzes", icon: "fa-brain", earned: false },
+  { name: "Yellow Belt", desc: "Reach Yellow Belt rank", icon: "fa-award", earned: false },
+  { name: "Orange Belt", desc: "Reach Orange Belt rank", icon: "fa-award", earned: false },
+  { name: "Light Blue Belt", desc: "Reach Light Blue Belt rank", icon: "fa-award", earned: false },
+  { name: "Dark Blue Belt", desc: "Reach Dark Blue Belt rank", icon: "fa-award", earned: false },
+  { name: "Green Belt", desc: "Reach Green Belt rank", icon: "fa-award", earned: false },
+  { name: "Purple Belt", desc: "Reach Purple Belt rank", icon: "fa-award", earned: false },
+  { name: "Brown Belt", desc: "Reach Brown Belt rank", icon: "fa-award", earned: false },
+  { name: "Brown 1 Belt", desc: "Reach Brown 1 Belt rank", icon: "fa-award", earned: false },
+  { name: "Brown 2 Belt", desc: "Reach Brown 2 Belt rank", icon: "fa-award", earned: false },
+  { name: "Black Belt", desc: "Reach Black Belt rank", icon: "fa-award", earned: false }
+];
+
+/* INITIALIZATION */
+function init() {
+  document.querySelectorAll('.page').forEach(page => {
+    page.style.display = 'none';
+  });
+  updateUserStats();
+  updateAchievements();
+  document.getElementById('displayUsername').textContent = currentUser;
+  initTheme();
+  updateTermStats();
+  
+  // Set up global quiz submission listener
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('submit-quiz-btn') || e.target.closest('.submit-quiz-btn')) {
+      const btn = e.target.classList.contains('submit-quiz-btn') ? e.target : e.target.closest('.submit-quiz-btn');
+      const sanctuaryIndex = parseInt(btn.getAttribute('data-sanctuary'));
+      submitQuiz(sanctuaryIndex);
+    }
+  });
+}
+
+/* LOGIN/SIGNUP TOGGLE FUNCTIONS */
+function toggleSignup() {
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('signupForm').style.display = 'block';
+}
+
+function toggleLogin() {
+  document.getElementById('signupForm').style.display = 'none';
+  document.getElementById('loginForm').style.display = 'block';
+}
+
+function signup() {
+  const username = document.getElementById('signupUsername').value.trim();
+  const password = document.getElementById('signupPassword').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+  
+  if (!username || !password) {
+    alert('Please enter both username and password.');
+    return;
+  }
+  
+  if (password !== confirmPassword) {
+    alert('Passwords do not match.');
+    return;
+  }
+  
+  if (userAccounts[username]) {
+    alert('Username already exists. Please choose another.');
+    return;
+  }
+  
+  userAccounts[username] = {
+    password: password,
+    progress: 1
+  };
+  
+  localStorage.setItem("userAccounts", JSON.stringify(userAccounts));
+  
+  currentUser = username;
+  localStorage.setItem("currentUser", currentUser);
+  
+  const newUserData = {
+    techniques: 0,
+    trainingDays: 1,
+    kataCompleted: 0,
+    dojoHours: 0,
+    journalEntries: [],
+    achievements: [],
+    quizMastery: 0,
+    completedSanctuaries: 0
+  };
+  saveUserData(newUserData);
+  
+  unlocked = 1;
+  localStorage.setItem("unlocked", unlocked);
+  
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('nav').style.display = 'block';
+  showPage('dashboard');
+  renderDashboard();
+  
+  document.getElementById('displayUsername').textContent = currentUser;
+  showNotification(`Welcome to the dojo, ${username}!`);
+}
+
+function login() {
+  const username = document.getElementById('loginUsername').value;
+  const password = document.getElementById('loginPassword').value;
+  
+  if (username === 'sensei' && password === 'karate') {
+    currentUser = "Sensei";
+    localStorage.setItem("currentUser", currentUser);
+    unlocked = userAccounts["sensei"].progress || 1;
+    localStorage.setItem("unlocked", unlocked);
+  } 
+  else if (userAccounts[username] && userAccounts[username].password === password) {
+    currentUser = username;
+    localStorage.setItem("currentUser", currentUser);
+    unlocked = userAccounts[username].progress || 1;
+    localStorage.setItem("unlocked", unlocked);
+  } else {
+    alert('Invalid username or password. Use "sensei" / "karate" for demo.');
+    return;
+  }
+  
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('nav').style.display = 'block';
+  showPage('dashboard');
+  renderDashboard();
+  
+  document.getElementById('displayUsername').textContent = currentUser;
+  
+  let userData = getUserData();
+  userData.trainingDays++;
+  saveUserData(userData);
+  updateUserStats();
+}
+
+function logout() {
+  if (userAccounts[currentUser]) {
+    userAccounts[currentUser].progress = unlocked;
+    localStorage.setItem("userAccounts", JSON.stringify(userAccounts));
+  }
+  
+  document.getElementById('nav').style.display = 'none';
+  document.getElementById('login').style.display = 'flex';
+  document.querySelectorAll('.page').forEach(page => {
+    page.style.display = 'none';
+  });
+  
+  document.getElementById('loginForm').style.display = 'block';
+  document.getElementById('signupForm').style.display = 'none';
+  document.getElementById('loginUsername').value = '';
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('signupUsername').value = '';
+  document.getElementById('signupPassword').value = '';
+  document.getElementById('confirmPassword').value = '';
+}
+
+/* PAGE NAVIGATION */
+function showPage(pageName) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+    page.style.display = 'none';
+  });
+ 
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
+  });
+ 
+  document.querySelectorAll('.nav-link').forEach(link => {
+    if (link.textContent.includes(pageName.toUpperCase())) {
+      link.classList.add('active');
+    }
+  });
+ 
+  document.getElementById(pageName).classList.add('active');
+  document.getElementById(pageName).style.display = 'block';
+  currentPage = pageName;
+ 
+  if (pageName === 'dashboard') {
+    renderDashboard();
+  } else if (pageName === 'achievements') {
+    updateAchievements();
+  }
+}
+
+/* DASHBOARD FUNCTIONS */
+function renderDashboard() {
+  document.getElementById('displayUsername').textContent = currentUser;
+  
+  const beltIndex = Math.min(unlocked - 1, belts.length - 1);
+  document.getElementById("belt").innerText = belts[beltIndex];
+ 
+  const progress = Math.min(100, Math.round((unlocked / 10) * 100));
+  document.getElementById("progressPercent").innerText = `${progress}%`;
+  document.getElementById("progressFill").style.width = `${progress}%`;
+ 
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+ 
+  sanctuaries.forEach((s, i) => {
+    const c = document.createElement("div");
+    c.className = "card";
+    if (i === active) c.classList.add("active");
+    if (i + 1 > unlocked) c.classList.add("locked");
+   
+    const beltColor = belts[Math.min(i, belts.length - 1)];
+    const quizScore = quizScores[i] || 0;
+    c.innerHTML = `
+      <div class="card-level">LEVEL ${i + 1}</div>
+      <h2>${s.name}</h2>
+      <p>${beltColor} BELT</p>
+      ${quizScore > 0 ? `<p style="color: var(--gold); font-size: 12px; margin-bottom: 10px;"><i class="fas fa-star"></i> Quiz: ${quizScore}/100</p>` : ''}
+      ${i + 1 <= unlocked ? `<button onclick="openSanctuary(${i})"><i class="fas fa-door-open"></i> ENTER SANCTUARY</button>` : ""}
+    `;
+    grid.appendChild(c);
+  });
+ 
+  updateScoreDisplay();
+}
+
+function openSanctuary(i) {
+  active = i;
+  
+  const box = document.getElementById("sanctuaryContent");
+  box.innerHTML = `<h2 style="color: var(--gold); margin-bottom: 30px; letter-spacing: 3px; font-family: 'Playfair Display', serif;">${sanctuaries[i].name}</h2>${sanctuaries[i].content}`;
+  box.style.display = "block";
+  
+  // Set up click handlers for quiz options
+  setupQuizClickHandlers();
+  
+  renderDashboard();
+  window.scrollTo({ top: document.getElementById("sanctuaryContent").offsetTop - 100, behavior: 'smooth' });
+}
+
+function setupQuizClickHandlers() {
+  const sanctuaryContent = document.getElementById("sanctuaryContent");
+  const quizOptions = sanctuaryContent.querySelectorAll('.quiz-option');
+  
+  quizOptions.forEach(option => {
+    option.onclick = function(e) {
+      // Remove selected class from all options in the same question
+      const questionDiv = this.closest('.quiz-question');
+      questionDiv.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      
+      // Add selected class to this option
+      this.classList.add('selected');
+      
+      // Get the question index and answer index
+      const questionIndex = parseInt(this.getAttribute('data-q'));
+      const answerIndex = parseInt(this.getAttribute('data-a'));
+      
+      // Save the answer
+      if (!selectedAnswers[active]) {
+        selectedAnswers[active] = {};
+      }
+      selectedAnswers[active][questionIndex] = answerIndex;
+      
+      // Hide any previous feedback
+      const feedbackDiv = questionDiv.querySelector('.quiz-feedback');
+      if (feedbackDiv) {
+        feedbackDiv.style.display = 'none';
+        feedbackDiv.classList.remove('correct', 'incorrect');
+      }
+    };
+  });
+  
+  // Check if quiz was already completed
+  if (quizScores[active] > 0) {
+    const quizDiv = sanctuaryContent.querySelector('.quiz-section');
+    if (quizDiv) {
+      const submitBtn = quizDiv.querySelector('.submit-quiz-btn');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> QUIZ COMPLETED';
+        submitBtn.style.opacity = '0.7';
+        submitBtn.style.cursor = 'not-allowed';
+      }
+      
+      // Show previous score
+      const existingResult = quizDiv.querySelector('.quiz-result');
+      if (existingResult) existingResult.remove();
+      
+      const resultDiv = document.createElement('div');
+      resultDiv.className = 'quiz-result';
+      resultDiv.innerHTML = `
+        <h4>Quiz Already Completed</h4>
+        <p>Previous score: ${quizScores[active]}%</p>
+      `;
+      resultDiv.style.display = 'block';
+      resultDiv.style.padding = '25px';
+      resultDiv.style.borderRadius = '16px';
+      resultDiv.style.marginTop = '20px';
+      resultDiv.style.textAlign = 'center';
+      resultDiv.style.background = quizScores[active] >= 70 ?
+        'linear-gradient(145deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05))' :
+        'linear-gradient(145deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05))';
+      resultDiv.style.border = quizScores[active] >= 70 ? '1px solid var(--correct)' : '1px solid var(--incorrect)';
+      
+      quizDiv.appendChild(resultDiv);
+    }
+  }
+}
+
+function completeSanctuary(i) {
+  if (i === unlocked - 1) {
+    unlocked++;
+    localStorage.setItem("unlocked", unlocked);
+    
+    if (userAccounts[currentUser]) {
+      userAccounts[currentUser].progress = unlocked;
+      localStorage.setItem("userAccounts", JSON.stringify(userAccounts));
+    }
+   
+    let userData = getUserData();
+    userData.trainingDays++;
+    userData.dojoHours += 2;
+    userData.techniques += 5;
+    userData.completedSanctuaries++;
+    saveUserData(userData);
+   
+    const beltAchievements = [
+      "Yellow Belt", "Orange Belt", "Light Blue Belt", "Dark Blue Belt",
+      "Green Belt", "Purple Belt", "Brown Belt", "Brown 1 Belt", "Brown 2 Belt", "Black Belt"
+    ];
+   
+    if (unlocked - 2 < beltAchievements.length) {
+      awardAchievement(beltAchievements[unlocked - 2]);
+    }
+   
+    updateUserStats();
+   
+    if (unlocked === 11) {
+      setTimeout(() => {
+        document.getElementById("ceremony").style.display = "flex";
+        awardAchievement("Black Belt");
+      }, 1000);
+    }
+   
+    renderDashboard();
+    document.getElementById("sanctuaryContent").style.display = "none";
+    active = null;
+  }
+}
+
+function unlockBlackBelt() {
+  unlocked = 11;
+  localStorage.setItem("unlocked", unlocked);
+  
+  if (userAccounts[currentUser]) {
+    userAccounts[currentUser].progress = unlocked;
+    localStorage.setItem("userAccounts", JSON.stringify(userAccounts));
+  }
+  
+  let userData = getUserData();
+  userData.achievements.push("Black Belt");
+  saveUserData(userData);
+  
+  updateUserStats();
+  document.getElementById("ceremony").style.display = "flex";
+  renderDashboard();
+}
+
+function closeCeremony() {
+  document.getElementById("ceremony").style.display = "none";
+  showPage('dashboard');
+}
+
+/* SCORE DISPLAY FUNCTIONS */
+function updateScoreDisplay() {
+  let userData = getUserData();
+  
+  const completedQuizzes = quizScores.filter(score => score > 0).length;
+  const totalQuizScore = quizScores.reduce((a, b) => a + b, 0);
+  const averageQuizScore = completedQuizzes > 0 ? Math.round(totalQuizScore / completedQuizzes) : 0;
+ 
+  const levelScore = (unlocked - 1) * 50;
+  const quizScore = averageQuizScore * 3;
+  const achievementScore = userData.achievements.length * 20;
+  const overallScore = levelScore + quizScore + achievementScore;
+ 
+  document.getElementById('overallScore').innerText = `${overallScore}/1000`;
+  document.getElementById('quizAverage').innerText = `${averageQuizScore}%`;
+  document.getElementById('completedLevels').innerText = `${unlocked - 1}/10`;
+  document.getElementById('achievementsEarned').innerText = `${userData.achievements.length}/14`;
+}
+
+/* QUIZ FUNCTIONS */
+let selectedAnswers = {};
+
+function selectAnswer(element, questionIndex, answerIndex) {
+  // This function is kept for backward compatibility
+  // but we're using the new onclick handlers in setupQuizClickHandlers
+}
+
+function submitQuiz(sanctuaryIndex) {
+  console.log("Submitting quiz for sanctuary:", sanctuaryIndex);
+  
+  // Get the current sanctuary content container
+  const sanctuaryContent = document.getElementById("sanctuaryContent");
+  const quizDiv = sanctuaryContent.querySelector('.quiz-section');
+  
+  // If no quiz section found, exit
+  if (!quizDiv) {
+    console.error("Quiz section not found");
+    return;
+  }
+  
+  const questions = quizDiv.querySelectorAll('.quiz-question');
+  let score = 0;
+  let totalQuestions = questions.length;
+ 
+  const answeredQuestions = selectedAnswers[sanctuaryIndex] || {};
+  
+  // Check if all questions are answered
+  if (Object.keys(answeredQuestions).length < totalQuestions) {
+    showNotification("Please answer all questions before submitting!");
+    return;
+  }
+ 
+  // Clear any previous result
+  const existingResult = quizDiv.querySelector('.quiz-result');
+  if (existingResult) {
+    existingResult.remove();
+  }
+  
+  // Grade each question
+  questions.forEach((question, index) => {
+    const userAnswer = answeredQuestions[index];
+    const correctAnswer = quizAnswers[sanctuaryIndex][index];
+    const options = question.querySelectorAll('.quiz-option');
+    const feedbackDiv = question.querySelector('.quiz-feedback');
+   
+    // Reset classes
+    options.forEach(opt => {
+      opt.classList.remove('correct', 'incorrect', 'selected');
+    });
+   
+    // Mark correct answer
+    options[correctAnswer].classList.add('correct');
+   
+    // Mark user's answer if incorrect
+    if (userAnswer !== correctAnswer) {
+      options[userAnswer].classList.add('incorrect');
+    } else {
+      score++;
+    }
+   
+    // Show feedback
+    if (feedbackDiv) {
+      feedbackDiv.textContent = quizFeedback[sanctuaryIndex][index];
+      feedbackDiv.classList.add(userAnswer === correctAnswer ? 'correct' : 'incorrect');
+      feedbackDiv.style.display = 'block';
+    }
+  });
+ 
+  const percentage = Math.round((score / totalQuestions) * 100);
+  console.log(`Score: ${score}/${totalQuestions} (${percentage}%)`);
+ 
+  // Save quiz score
+  quizScores[sanctuaryIndex] = percentage;
+  localStorage.setItem("quizScores", JSON.stringify(quizScores));
+ 
+  // Check for Quiz Master achievement
+  const perfectQuizzes = quizScores.filter(score => score === 100).length;
+  let userData = getUserData();
+  userData.quizMastery = perfectQuizzes;
+  if (perfectQuizzes >= 5 && !userData.achievements.includes("Quiz Master")) {
+    awardAchievement("Quiz Master");
+  }
+  saveUserData(userData);
+ 
+  // Create result div
+  const resultDiv = document.createElement('div');
+  resultDiv.className = 'quiz-result';
+  resultDiv.innerHTML = `
+    <h4>Quiz Complete!</h4>
+    <p>You scored ${score}/${totalQuestions} (${percentage}%)</p>
+    ${percentage === 100 ? '<p style="color: var(--gold);"><i class="fas fa-crown"></i> Perfect score! Excellent work!</p>' : ''}
+  `;
+  
+  // Style the result
+  resultDiv.style.display = 'block';
+  resultDiv.style.background = percentage >= 70 ?
+    'linear-gradient(145deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05))' :
+    'linear-gradient(145deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05))';
+  resultDiv.style.border = percentage >= 70 ? '1px solid var(--correct)' : '1px solid var(--incorrect)';
+  resultDiv.style.padding = '25px';
+  resultDiv.style.borderRadius = '16px';
+  resultDiv.style.marginTop = '20px';
+  resultDiv.style.textAlign = 'center';
+  
+  // Add result to quiz section
+  quizDiv.appendChild(resultDiv);
+  
+  // Disable submit button
+  const submitBtn = quizDiv.querySelector('.submit-quiz-btn');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> QUIZ COMPLETED';
+    submitBtn.style.opacity = '0.7';
+    submitBtn.style.cursor = 'not-allowed';
+  }
+  
+  // Update user stats
+  userData.dojoHours += 0.5;
+  saveUserData(userData);
+  updateUserStats();
+  updateScoreDisplay();
+  
+  showNotification(`Quiz submitted! Score: ${percentage}%`);
+  
+  // Update the dashboard card to show quiz score
+  renderDashboard();
+}
+
+/* FUN Q&A FUNCTIONS */
+function toggleQA(element) {
+  element.classList.toggle('active');
+}
+
+/* DOJO FUNCTIONS */
+function practiceKihon() {
+  let userData = getUserData();
+  userData.techniques += 5;
+  userData.dojoHours += 0.5;  
+  saveUserData(userData);
+ 
+  if (userData.techniques >= 25) awardAchievement("Kihon Master");
+ 
+  updateUserStats();
+  showNotification("Kihon training completed! +5 techniques practiced.");
+}
+
+function viewKata() {
+  openKataModal();
+}
+
+/* SIMPLE KATA MODAL FUNCTIONS */
+function openKataModal() {
+  document.getElementById('kataModal').style.display = 'flex';
+  
+  let userData = getUserData();
+  userData.kataCompleted = Math.min(12, userData.kataCompleted + 1);
+  userData.dojoHours += 1;
+  saveUserData(userData);
+ 
+  if (userData.kataCompleted === 1) awardAchievement("Kata Initiate");
+ 
+  updateUserStats();
+  showNotification(`Kata studied! Total: ${userData.kataCompleted}/12`);
+}
+
+function closeKataModal() {
+  document.getElementById('kataModal').style.display = 'none';
+}
+
+/* CORE TECHNIQUES MODAL FUNCTIONS */
+function openCoreTechniquesModal() {
+  document.getElementById('coreTechniquesModal').style.display = 'flex';
+  
+  let userData = getUserData();
+  userData.techniques += 2;
+  userData.dojoHours += 0.5;
+  saveUserData(userData);
+  updateUserStats();
+  
+  showNotification("Core techniques studied!");
+}
+
+function closeCoreTechniquesModal() {
+  document.getElementById('coreTechniquesModal').style.display = 'none';
+}
+
+/* SPARRING MODAL FUNCTIONS */
+function openSparringModal() {
+  document.getElementById('sparringModal').style.display = 'flex';
+  
+  let userData = getUserData();
+  userData.dojoHours += 0.5;
+  saveUserData(userData);
+  updateUserStats();
+  
+  showNotification("Sparring methods studied!");
+}
+
+function closeSparringModal() {
+  document.getElementById('sparringModal').style.display = 'none';
+}
+
+/* EQUIPMENT MODAL FUNCTIONS */
+function openEquipmentModal() {
+  document.getElementById('equipmentModal').style.display = 'flex';
+  
+  let userData = getUserData();
+  userData.techniques += 1;
+  userData.dojoHours += 0.5;
+  saveUserData(userData);
+  updateUserStats();
+  
+  showNotification("Training equipment studied!");
+}
+
+function closeEquipmentModal() {
+  document.getElementById('equipmentModal').style.display = 'none';
+}
+
+function practiceKumite() {
+  let userData = getUserData();
+  userData.dojoHours += 1;
+  saveUserData(userData);
+  updateUserStats();
+  showNotification("Sparring session completed! Improved timing and distance management.");
+}
+
+function viewHojoUndo() {
+  let userData = getUserData();
+  userData.techniques += 3;
+  saveUserData(userData);
+  updateUserStats();
+  showNotification("Hojo Undo equipment studied! Traditional conditioning tools examined.");
+}
+
+/* JOURNAL FUNCTIONS */
+function saveJournal() {
+  let userData = getUserData();
+  const entry = document.getElementById('journalEntry').value;
+  if (entry.trim()) {
+    const journalEntry = {
+      date: new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+      time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+      content: entry,
+      timestamp: new Date().toISOString()
+    };
+    userData.journalEntries.unshift(journalEntry);
+    saveUserData(userData);
+    document.getElementById('journalEntry').value = '';
+    showNotification("Training journal entry saved!");
+    viewPastEntries();
+  }
+}
+
+function viewPastEntries() {
+  let userData = getUserData();
+  const container = document.getElementById('pastEntries');
+  container.innerHTML = '<h3 style="color: var(--gold); margin-bottom: 25px; font-family: \'Playfair Display\', serif;">RECORD OF TRAINING</h3>';
+ 
+  if (userData.journalEntries.length === 0) {
+    container.innerHTML += '<p style="color: var(--muted); text-align: center; padding: 30px;">No journal entries yet. Record your first training session!</p>';
+    return;
+  }
+ 
+  userData.journalEntries.slice(0, 5).forEach(entry => {
+    const div = document.createElement('div');
+    div.className = 'journal-entry';
+    div.innerHTML = `
+      <div class="journal-date"><i class="far fa-calendar"></i> ${entry.date} • <i class="far fa-clock"></i> ${entry.time}</div>
+      <p>${entry.content}</p>
+    `;
+    container.appendChild(div);
+  });
+}
+
+/* ACHIEVEMENTS */
+function updateAchievements() {
+  let userData = getUserData();
+  
+  if (userData.trainingDays >= 7) awardAchievement("Discipline");
+  if (userData.dojoHours >= 100) awardAchievement("Warrior Spirit");
+  if (userData.trainingDays > 0) awardAchievement("First Steps");
+  if (userData.quizMastery >= 5) awardAchievement("Quiz Master");
+ 
+  const grid = document.getElementById("achievementsGrid");
+  if (!grid) return;
+ 
+  grid.innerHTML = "";
+ 
+  achievementList.forEach((achievement, index) => {
+    const earned = userData.achievements.includes(achievement.name);
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.opacity = earned ? "1" : "0.5";
+    card.innerHTML = `
+      <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <i class="fas ${achievement.icon}" style="font-size: 24px; color: ${earned ? 'var(--gold)' : 'var(--muted)'}; margin-right: 15px;"></i>
+        <div>
+          <h3 style="margin: 0; color: ${earned ? 'var(--gold)' : 'white'}; font-family: 'Playfair Display', serif;">${achievement.name}</h3>
+          <p style="margin: 5px 0 0 0; color: var(--muted); font-size: 13px;">${achievement.desc}</p>
+        </div>
+      </div>
+      ${earned ? '<div style="color: var(--gold); font-size: 12px; letter-spacing: 1px;"><i class="fas fa-check-circle"></i> EARNED</div>' : '<div style="color: var(--muted); font-size: 12px; letter-spacing: 1px;"><i class="far fa-circle"></i> LOCKED</div>'}
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function awardAchievement(name) {
+  let userData = getUserData();
+  if (!userData.achievements.includes(name)) {
+    userData.achievements.push(name);
+    saveUserData(userData);
+    showNotification(`Achievement Unlocked: ${name}!`);
+    updateAchievements();
+    updateScoreDisplay();
+  }
+}
+
+/* STATS UPDATE */
+function updateUserStats() {
+  let userData = getUserData();
+  saveUserData(userData);
+  localStorage.setItem("unlocked", unlocked);
+ 
+  document.getElementById('techniquesCount').innerText = userData.techniques;
+  document.getElementById('trainingDays').innerText = userData.trainingDays;
+  document.getElementById('kataCompleted').innerText = userData.kataCompleted;
+  document.getElementById('dojoHours').innerText = Math.floor(userData.dojoHours);
+ 
+  updateScoreDisplay();
+}
+
+/* NOTIFICATION */
+function showNotification(message) {
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: linear-gradient(145deg, rgba(25,25,25,0.95), rgba(15,15,15,0.98));
+    border: 1px solid var(--gold);
+    border-left: 5px solid var(--gold);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 10000;
+    max-width: 300px;
+    animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+    font-family: "Roboto", sans-serif;
+  `;
+ 
+  notification.innerHTML = `<i class="fas fa-bell" style="color: var(--gold); margin-right: 10px;"></i> ${message}`;
+  document.body.appendChild(notification);
+ 
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.parentNode.removeChild(notification);
+    }
+  }, 3000);
+}
+
+/* SAKURA ANIMATION */
+setInterval(() => {
+  const p = document.createElement("div");
+  p.className = "sakura";
+  p.style.left = Math.random() * 100 + "vw";
+  p.style.animationDuration = (5 + Math.random() * 6) + "s";
+  p.style.opacity = (0.4 + Math.random() * 0.6);
+  p.style.width = (10 + Math.random() * 8) + "px";
+  p.style.height = p.style.width;
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 12000);
+}, 300);
+
+// Theme Management Functions
+function initTheme() {
+  const savedTheme = localStorage.getItem('karateTheme') || 'dark';
+  if (savedTheme === 'light') {
+    enableLightMode();
+  } else {
+    enableDarkMode();
+  }
+}
+
+function toggleTheme() {
+  const currentTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+  
+  if (currentTheme === 'light') {
+    enableDarkMode();
+  } else {
+    enableLightMode();
+  }
+}
+
+function enableDarkMode() {
+  document.body.classList.remove('light-mode');
+  document.documentElement.classList.remove('light-mode');
+  
+  const themeIcon = document.getElementById('themeIcon');
+  const themeText = document.getElementById('themeText');
+  if (themeIcon) {
+    themeIcon.className = 'fas fa-moon';
+  }
+  if (themeText) {
+    themeText.textContent = 'DOJO MODE';
+  }
+  
+  localStorage.setItem('karateTheme', 'dark');
+}
+
+function enableLightMode() {
+  document.body.classList.add('light-mode');
+  document.documentElement.classList.add('light-mode');
+  
+  const themeIcon = document.getElementById('themeIcon');
+  const themeText = document.getElementById('themeText');
+  if (themeIcon) {
+    themeIcon.className = 'fas fa-sun';
+  }
+  if (themeText) {
+    themeText.textContent = 'PAPER MODE';
+  }
+  
+  localStorage.setItem('karateTheme', 'light');
+}
+
+// Export Training Data Functions
+function exportTrainingData() {
+  let userData = getUserData();
+  
+  let csvContent = "Data Type,Value,Date\n";
+  
+  userData.journalEntries.forEach(entry => {
+    csvContent += `Journal Entry,${entry.content.replace(/,/g, ';')},${entry.date}\n`;
+  });
+  
+  userData.achievements.forEach(achievement => {
+    csvContent += `Achievement,${achievement},${new Date().toLocaleDateString()}\n`;
+  });
+  
+  csvContent += `Statistics,Techniques Mastered,${userData.techniques}\n`;
+  csvContent += `Statistics,Training Days,${userData.trainingDays}\n`;
+  csvContent += `Statistics,Kata Completed,${userData.kataCompleted}\n`;
+  csvContent += `Statistics,Dojo Hours,${userData.dojoHours}\n`;
+  csvContent += `Statistics,Current Rank,${belts[unlocked - 1]}\n`;
+  csvContent += `Statistics,Quiz Average,${document.getElementById('quizAverage').innerText}\n`;
+  
+  quizScores.forEach((score, index) => {
+    if (score > 0) {
+      csvContent += `Quiz,Sanctuary ${index + 1},${score}%\n`;
+    }
+  });
+  
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `karate_journey_${currentUser}_${new Date().toISOString().split('T')[0]}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
+  
+  showNotification("Training data exported successfully!");
+}
+
+function generateProgressReport() {
+  let userData = getUserData();
+  
+  let report = `
+========================================
+     KARATE-DO PROGRESS REPORT
+========================================
+Student: ${currentUser}
+Date: ${new Date().toLocaleDateString()}
+Rank: ${belts[unlocked - 1]} BELT
+Progress: ${Math.min(100, Math.round((unlocked / 10) * 100))}% to Black Belt
+
+STATISTICS:
+- Techniques Mastered: ${userData.techniques}
+- Training Days: ${userData.trainingDays}
+- Kata Completed: ${userData.kataCompleted}/12
+- Dojo Hours: ${Math.floor(userData.dojoHours)}
+- Quiz Average: ${document.getElementById('quizAverage').innerText}
+
+ACHIEVEMENTS (${userData.achievements.length}/14):
+${userData.achievements.map(a => `  ✓ ${a}`).join('\n')}
+
+RECENT JOURNAL ENTRIES:
+${userData.journalEntries.slice(0, 3).map(entry => 
+  `  [${entry.date}] ${entry.content.substring(0, 50)}${entry.content.length > 50 ? '...' : ''}`
+).join('\n')}
+
+MASTERY JOURNEY:
+${sanctuaries.map((s, i) => {
+  let status = i + 1 <= unlocked - 1 ? '✓ COMPLETED' : 
+               i + 1 === unlocked ? '⚡ CURRENT' : '○ LOCKED';
+  let quizScore = quizScores[i] ? `Quiz: ${quizScores[i]}%` : '';
+  return `  ${status} - ${s.name} ${quizScore}`;
+}).join('\n')}
+
+"The black belt is not a mark of an end, 
+ but a symbol of a beginning."
+========================================
+  `;
+  
+  const blob = new Blob([report], { type: 'text/plain' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `karate_report_${currentUser}_${new Date().toISOString().split('T')[0]}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
+  
+  showNotification("Progress report generated!");
+}
+
+// Terminology Flashcards Data - UPDATED WITH YOUR DATA
+const terminologyData = {
+  "striking points": [
+    { japanese: "Seiken", english: "Forefist", detail: "" },
+    { japanese: "Nakada Ippon Ken / Nakayubi", english: "Middle Finger Knuckle.", detail: "" },
+    { japanese: "Hitosashi Ippon Ken / Hitosashiyubi", english: "Forefinger knuckle", detail: "" },
+    { japanese: "Uraken", english: "Back of the fist", detail: "" },
+    { japanese: "Hiraken / Hadaken", english: "Knuckle joints", detail: "" },
+    { japanese: "Kentsui / Tetsui", english: "Bottom or hammer fist", detail: "" },
+    { japanese: "Yon Hon Nukite", english: "Four finger spear", detail: "" },
+    { japanese: "Ni hon Nukite", english: "Two finger spear", detail: "" },
+    { japanese: "Ippon Nukite", english: "One Finger Spear", detail: "" },
+    { japanese: "Oyayubi", english: "Thumb", detail: "" },
+    { japanese: "Shuto", english: "Sword or Knife Hand", detail: "" },
+    { japanese: "Shotei", english: "Palm Heel", detail: "" },
+    { japanese: "Koken", english: "Wrist joint", detail: "" },
+    { japanese: "Hiji", english: "Elbow strike", detail: "" },
+    { japanese: "Haito", english: "Ridge Hand", detail: "" },
+    { japanese: "Haishu", english: "Open backhand", detail: "" },
+    { japanese: "Kote", english: "Forearm.", detail: "" },
+    { japanese: "Ka-soku-tei", english: "Bottom heel", detail: "" },
+    { japanese: "Soku-to", english: "Edge of foot", detail: "" },
+    { japanese: "Jo-soku-tei", english: "Ball of the foot.", detail: "" },
+    { japanese: "Ushiro-kaka-to", english: "Backof the heel", detail: "" },
+    { japanese: "Ashi-kubi", english: "Instep", detail: "" },
+    { japanese: "Tsuma-saki", english: "Tip of toe", detail: "" },
+    { japanese: "Uchi-Soku-to", english: "Inside edge of the foot", detail: "" },
+    { japanese: "Sune", english: "Shin", detail: "" },
+    { japanese: "Hiza", english: "Knee", detail: "" }
+  ],
+  
+  founder: [
+    { japanese: "Goju-Ryu", english: "Master Chojun Miyagi", detail: "Year : 1929" },
+    { japanese: "Isshin-Ryu", english: "Tatsuo Shimabuku", detail: "Year : 1954" },
+    { japanese: "Shorei-Ryu", english: "Choki Motobu", detail: "Third count" },
+    { japanese: "Shorin-Ryu", english: "Choshin Chibana", detail: "Year : 1933" },
+    { japanese: "Uechi-Ryu", english: "Kanbon Uechi", detail: "Year : 1947" },
+    { japanese: "Kyokushinkai", english: "Masutatsu Oyama", detail: "Year : 1961" },
+    { japanese: "Shito-Ryu", english: "Kenwa Mabuni", detail: "Year : 1929" },
+    { japanese: "Shotokan", english: "Ginchin Funakoshi", detail: "Year : 1936" },
+    { japanese: "Wado-Ryu", english: "Ohtsuka Hironori", detail: "Year : 1939" }
+  ],
+  
+  commands: [
+    { japanese: "Kiyotsuke", english: "Attention", detail: "Stand at attention" },
+    { japanese: "Rei", english: "Bow", detail: "Show respect" },
+    { japanese: "Shomen ni rei", english: "Bow to front", detail: "Bow to the front of dojo" },
+    { japanese: "Sensei ni rei", english: "Bow to teacher", detail: "Bow to instructor" },
+    { japanese: "Yoi", english: "Ready", detail: "Get into ready position" },
+    { japanese: "Hajime", english: "Begin", detail: "Start training/exercise" },
+    { japanese: "Yame", english: "Stop", detail: "Stop training" },
+    { japanese: "Mawatte", english: "Turn around", detail: "Turn to face opposite direction" },
+    { japanese: "Seiza", english: "Kneel", detail: "Formal kneeling position" },
+    { japanese: "Mokuso", english: "Meditate", detail: "Close eyes and meditate" },
+    { japanese: "Mokuso yame", english: "Stop meditation", detail: "Open eyes, finish meditation" },
+    { japanese: "Kiai", english: "Spirit shout", detail: "Focused shout for power" },
+    { japanese: "Zanshin", english: "Awareness", detail: "Relaxed alertness after technique" }
+  ],
+  
+  kyusho: [
+    { japanese: "Tento", english: "Top of the head", detail: "Attacked mainly by Shuto & Kentsui." },
+    { japanese: "Miken", english: "Located just above the eyebrows", detail: "Attacked mainly by Seiken & Hadaken." },
+    { japanese: "Bito", english: "Bridge of the nose", detail: "Attacked mainly by Seiken, Shotei, Kentsui & Instep." },
+    { japanese: "Bisen", english: "Base of the nose", detail: "Attacked mainly by Seiken & Hadaken." },
+    { japanese: "Kasumi", english: "Temples", detail: "Attacked mainly by Seiken, Shuto, kentsu & Instep." },
+    { japanese: "Gankyu", english: "Eyeballs / Eye socket", detail: "Attacked mainly by Ippon ken, Nihon Nukite & Naka Daka Ken." },
+    { japanese: "Jinchu", english: "Upper lip", detail: "Attacked mainly by Seiken, Shuto, Kentsui, Uraken, Koken, Ball of the foot, Edge of the foot & instep." },
+    { japanese: "Kagaku", english: "Lower part of jaw", detail: "Attacked mainly by Seiken" },
+    { japanese: "Mikazuki", english: "Base of lower jaw", detail: "Attacked mainly by Seiken, Ate & Geri" },
+    { japanese: "Ryo Jikou Kabotoke", english: "Mastoid : Cavity below the ears", detail: "Attacked mainly by Nukite, Shuto & Ippon Ken" },
+    { japanese: "Nodo Botoke", english: "Adam's Apple", detail: "Attacked mainly by Shuto, Hadaken, Koken & Geri" },
+    { japanese: "Matsukaze", english: "Jugular vein area", detail: "Attacked mainly by Shuto, Koken, Sokuto & Hadaken" },
+    { japanese: "Hichu", english: "Neck's notch", detail: "Attacked mainly by Nukite & Ippon ken." },
+    { japanese: "Kyokotsu", english: "Sternum", detail: "Attacked mainly by Seiken, Shuto, Shotei, Kentsui & Geri" },
+    { japanese: "Ganka", english: "Ribcage region below the nipples", detail: "Located below the 5th & 6th ribs on each side of the chest" },
+    { japanese: "Rokkotsu / Denko", english: "Ribcage Area", detail: "Attacked mainly by Seiken, Kentsui, Shuto, Empi & Geri" },
+    { japanese: "Mizo Ochi / Sulgetsu", english: "Solar Plexus", detail: "Attacked mainly by Most hand & most foot techniques." },
+    { japanese: "Kafuku Bu", english: "Lower abdomen / tanden", detail: "Attacked mainly by Sugi, Geri & Uchi waza" },
+    { japanese: "Kinteki", english: "Testicles", detail: "Attacked mainly by Geri, Sugi, Uchi & Ate" },
+    { japanese: "Yako", english: "Inguinal Region", detail: "Attacked mainly by all techniques" },
+    { japanese: "Fushito", english: "Outside Thigh", detail: "Attacked mainly by Geri" },
+    { japanese: "Shitsu To", english: "Knee Cap", detail: "Attacked mainly by Geri" },
+    { japanese: "Keikotsu / Kokei", english: "Tibia: Located on the edge of the leg bone", detail: "Attacked mainly by Geri" },
+    { japanese: "Sokko", english: "Instep", detail: "Attacked mainly by Geri, Empi & Seiken." },
+    { japanese: "Haisu", english: "Back of the hand", detail: "Attacked mainly by Uraken & Naka Daka Ken." },
+    { japanese: "Kassatsu", english: "Spine", detail: "Attacked mainly by Seiken, Shuto, Geri, Kentsui & Ate waza." },
+    { japanese: "Kotobu", english: "Back of the head", detail: "Attacked mainly by Seiken, Uraken, Shuto, Hijiate, Kentsui & Geri" },
+    { japanese: "Keichu", english: "Back of the neck.", detail: "Attacked mainly by Shuto, Seiken, Kentsui, Geri & Ate waza" },
+    { japanese: "Ushiro Denko", english: "Kidneys", detail: "Attacked mainly by Seiken, Shuto, Geri & Ate waza" },
+    { japanese: "Hiza Kubomi", english: "Back of the knee.", detail: "Attacked mainly by Geri." },
+    { japanese: "Kuru Bushi", english: "Ankle", detail: "Attacked mainly by Geri" }
+  ],
+  
+  philosophy: [
+    { japanese: "Karate-do", english: "The Way of the Empty Hand", detail: "Martial art path" },
+    { japanese: "Dojo", english: "Place of the Way", detail: "Training hall" },
+    { japanese: "Sensei", english: "One who has gone before", detail: "Teacher/instructor" },
+    { japanese: "Sempai", english: "Senior student", detail: "More experienced student" },
+    { japanese: "Kohai", english: "Junior student", detail: "Less experienced student" },
+    { japanese: "Osu", english: "Push/Endure", detail: "Expression of respect and perseverance" },
+    { japanese: "Kata", english: "Form", detail: "Pre-arranged sequence of movements" },
+    { japanese: "Kumite", english: "Meeting of hands", detail: "Sparring" },
+    { japanese: "Kihon", english: "Basics", detail: "Fundamental techniques" },
+    { japanese: "Bunkai", english: "Analysis", detail: "Application of kata movements" },
+    { japanese: "Mushin", english: "No mind", detail: "State of empty consciousness" },
+    { japanese: "Zanshin", english: "Remaining mind", detail: "State of relaxed awareness" }
+  ]
+};
+
+// Flashcard state variables
+let currentCategory = '';
+let currentCards = [];
+let currentIndex = 0;
+let quizMode = false;
+let termsStats = JSON.parse(localStorage.getItem('termStats')) || {};
+
+// Show Terminology Page
+function showTerminologyPage() {
+  showPage('terminology');
+  setTimeout(() => {
+    initTerminologyPage();
+  }, 100);
+}
+
+// Initialize terminology page
+function initTerminologyPage() {
+  currentCategory = '';
+  currentCards = [];
+  currentIndex = 0;
+  quizMode = false;
+  
+  const flashcardCategory = document.getElementById('flashcardCategory');
+  const frontContent = document.getElementById('frontContent');
+  const backContent = document.getElementById('backContent');
+  const backDetail = document.getElementById('backDetail');
+  const cardCounter = document.getElementById('cardCounter');
+  const prevCardBtn = document.getElementById('prevCardBtn');
+  const nextCardBtn = document.getElementById('nextCardBtn');
+  const quizModeCheckbox = document.getElementById('quizModeCheckbox');
+  const quizInputContainer = document.getElementById('quizInputContainer');
+  const quizAnswer = document.getElementById('quizAnswer');
+  const quizFeedback = document.getElementById('quizFeedback');
+  const flashcard = document.getElementById('flashcard');
+  const startQuizBtn = document.getElementById('startQuizBtn');
+  
+  if (flashcardCategory) flashcardCategory.innerHTML = 'Select a category to begin';
+  if (frontContent) frontContent.textContent = '🥋';
+  if (backContent) backContent.textContent = '';
+  if (backDetail) backDetail.textContent = '';
+  if (cardCounter) cardCounter.textContent = '0/0';
+  if (prevCardBtn) prevCardBtn.disabled = true;
+  if (nextCardBtn) nextCardBtn.disabled = true;
+  
+  if (flashcard) {
+    flashcard.classList.remove('flipped');
+    flashcard.style.cursor = 'pointer';
+    flashcard.onclick = flipCard;
+  }
+  
+  if (quizModeCheckbox) quizModeCheckbox.checked = false;
+  if (quizInputContainer) quizInputContainer.style.display = 'none';
+  if (quizAnswer) quizAnswer.value = '';
+  if (quizFeedback) quizFeedback.innerHTML = '';
+  if (startQuizBtn) startQuizBtn.innerHTML = '<i class="fas fa-play"></i> START QUIZ';
+  
+  updateTermStats();
+}
+
+// Load flashcards by category
+function loadFlashcards(category) {
+  currentCategory = category;
+  currentCards = terminologyData[category] || [];
+  currentIndex = 0;
+  quizMode = false;
+  
+  const flashcardCategory = document.getElementById('flashcardCategory');
+  const quizModeCheckbox = document.getElementById('quizModeCheckbox');
+  const quizInputContainer = document.getElementById('quizInputContainer');
+  const flashcard = document.getElementById('flashcard');
+  const startQuizBtn = document.getElementById('startQuizBtn');
+  
+  if (flashcardCategory) {
+    flashcardCategory.innerHTML = category.toUpperCase() + ' FLASHCARDS';
+  }
+  
+  if (currentCards.length > 0) {
+    displayCurrentCard();
+    updateCardCounter();
+    
+    const prevCardBtn = document.getElementById('prevCardBtn');
+    const nextCardBtn = document.getElementById('nextCardBtn');
+    
+    if (prevCardBtn) prevCardBtn.disabled = true;
+    if (nextCardBtn) nextCardBtn.disabled = currentCards.length <= 1;
+  }
+  
+  if (quizModeCheckbox) quizModeCheckbox.checked = false;
+  if (quizInputContainer) quizInputContainer.style.display = 'none';
+  if (flashcard) {
+    flashcard.style.cursor = 'pointer';
+    flashcard.onclick = flipCard;
+  }
+  if (startQuizBtn) startQuizBtn.innerHTML = '<i class="fas fa-play"></i> START QUIZ';
+  
+  const quizFeedback = document.getElementById('quizFeedback');
+  const quizAnswer = document.getElementById('quizAnswer');
+  if (quizFeedback) quizFeedback.innerHTML = '';
+  if (quizAnswer) quizAnswer.value = '';
+  
+  showNotification(`Loaded ${currentCards.length} flashcards`);
+}
+
+// Display current card
+function displayCurrentCard() {
+  if (!currentCards.length) return;
+  
+  const card = currentCards[currentIndex];
+  const frontContent = document.getElementById('frontContent');
+  const backContent = document.getElementById('backContent');
+  const backDetail = document.getElementById('backDetail');
+  const flashcard = document.getElementById('flashcard');
+  
+  if (frontContent) frontContent.textContent = card.japanese;
+  if (backContent) backContent.textContent = card.english;
+  if (backDetail) backDetail.textContent = card.detail || '';
+  
+  if (flashcard) {
+    flashcard.classList.remove('flipped');
+  }
+  
+  updateTermStats();
+}
+
+// Flip card
+function flipCard() {
+  if (!quizMode && currentCards.length > 0) {
+    const flashcard = document.getElementById('flashcard');
+    if (flashcard) {
+      flashcard.classList.toggle('flipped');
+      
+      const termId = `${currentCategory}_${currentIndex}`;
+      termsStats[termId] = (termsStats[termId] || 0) + 1;
+      localStorage.setItem('termStats', JSON.stringify(termsStats));
+      updateTermStats();
+    }
+  }
+}
+
+// Next card
+function nextCard() {
+  if (currentIndex < currentCards.length - 1) {
+    currentIndex++;
+    displayCurrentCard();
+    updateCardCounter();
+    
+    const prevCardBtn = document.getElementById('prevCardBtn');
+    const nextCardBtn = document.getElementById('nextCardBtn');
+    
+    if (prevCardBtn) prevCardBtn.disabled = false;
+    if (nextCardBtn) nextCardBtn.disabled = currentIndex === currentCards.length - 1;
+    
+    if (quizMode) {
+      const quizAnswer = document.getElementById('quizAnswer');
+      const quizFeedback = document.getElementById('quizFeedback');
+      if (quizAnswer) quizAnswer.value = '';
+      if (quizFeedback) quizFeedback.innerHTML = '';
+    }
+  }
+}
+
+// Previous card
+function previousCard() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    displayCurrentCard();
+    updateCardCounter();
+    
+    const prevCardBtn = document.getElementById('prevCardBtn');
+    const nextCardBtn = document.getElementById('nextCardBtn');
+    
+    if (prevCardBtn) prevCardBtn.disabled = currentIndex === 0;
+    if (nextCardBtn) nextCardBtn.disabled = false;
+    
+    if (quizMode) {
+      const quizAnswer = document.getElementById('quizAnswer');
+      const quizFeedback = document.getElementById('quizFeedback');
+      if (quizAnswer) quizAnswer.value = '';
+      if (quizFeedback) quizFeedback.innerHTML = '';
+    }
+  }
+}
+
+// Update card counter
+function updateCardCounter() {
+  const cardCounter = document.getElementById('cardCounter');
+  if (cardCounter && currentCards.length > 0) {
+    cardCounter.textContent = `${currentIndex + 1}/${currentCards.length}`;
+  }
+}
+
+// Start Quiz Mode button function
+function startQuizMode() {
+  if (!currentCards.length) {
+    showNotification("Please select a category first!");
+    return;
+  }
+  
+  quizMode = true;
+  const quizModeCheckbox = document.getElementById('quizModeCheckbox');
+  const quizInputContainer = document.getElementById('quizInputContainer');
+  const flashcard = document.getElementById('flashcard');
+  const startQuizBtn = document.getElementById('startQuizBtn');
+  
+  if (quizModeCheckbox) quizModeCheckbox.checked = true;
+  if (quizInputContainer) quizInputContainer.style.display = 'block';
+  if (flashcard) {
+    flashcard.style.cursor = 'default';
+    flashcard.onclick = null;
+  }
+  if (startQuizBtn) {
+    startQuizBtn.innerHTML = '<i class="fas fa-redo"></i> RESTART QUIZ';
+  }
+  
+  const quizAnswer = document.getElementById('quizAnswer');
+  const quizFeedback = document.getElementById('quizFeedback');
+  if (quizAnswer) {
+    quizAnswer.value = '';
+    quizAnswer.focus();
+  }
+  if (quizFeedback) quizFeedback.innerHTML = '';
+  
+  showNotification("Quiz mode activated! Type the English translation.");
+}
+
+// Toggle quiz mode
+function toggleQuizMode() {
+  const checkbox = document.getElementById('quizModeCheckbox');
+  if (checkbox.checked) {
+    startQuizMode();
+  } else {
+    endQuizMode();
+  }
+}
+
+// End quiz mode
+function endQuizMode() {
+  quizMode = false;
+  const quizInputContainer = document.getElementById('quizInputContainer');
+  const flashcard = document.getElementById('flashcard');
+  const quizModeCheckbox = document.getElementById('quizModeCheckbox');
+  const startQuizBtn = document.getElementById('startQuizBtn');
+  
+  if (quizInputContainer) quizInputContainer.style.display = 'none';
+  if (flashcard) {
+    flashcard.style.cursor = 'pointer';
+    flashcard.onclick = flipCard;
+  }
+  if (quizModeCheckbox) quizModeCheckbox.checked = false;
+  if (startQuizBtn) {
+    startQuizBtn.innerHTML = '<i class="fas fa-play"></i> START QUIZ';
+  }
+  
+  const quizFeedback = document.getElementById('quizFeedback');
+  const quizAnswer = document.getElementById('quizAnswer');
+  if (quizFeedback) quizFeedback.innerHTML = '';
+  if (quizAnswer) quizAnswer.value = '';
+}
+
+// Show answer function
+function showAnswer() {
+  if (!currentCards.length) {
+    showNotification("Please select a category first!");
+    return;
+  }
+  
+  const flashcard = document.getElementById('flashcard');
+  if (flashcard) {
+    flashcard.classList.add('flipped');
+  }
+  
+  const quizFeedback = document.getElementById('quizFeedback');
+  if (quizFeedback) {
+    const correctAnswer = currentCards[currentIndex].english;
+    quizFeedback.innerHTML = `<p style="color: var(--gold);"><i class="fas fa-lightbulb"></i> The answer is: ${correctAnswer}</p>`;
+  }
+}
+
+// Check quiz answer
+function checkQuizAnswer() {
+  if (!currentCards.length) {
+    showNotification("Please select a category first!");
+    return;
+  }
+  
+  const quizAnswer = document.getElementById('quizAnswer');
+  const quizFeedback = document.getElementById('quizFeedback');
+  
+  if (!quizAnswer || !quizFeedback) return;
+  
+  const answer = quizAnswer.value.trim().toLowerCase();
+  const correctAnswer = currentCards[currentIndex].english.toLowerCase();
+  
+  if (answer === '') {
+    quizFeedback.innerHTML = '<p style="color: var(--gold);"><i class="fas fa-exclamation-circle"></i> Please enter an answer!</p>';
+    return;
+  }
+  
+  const flashcard = document.getElementById('flashcard');
+  if (flashcard) {
+    flashcard.classList.add('flipped');
+  }
+  
+  if (answer === correctAnswer) {
+    quizFeedback.innerHTML = '<p style="color: var(--correct);"><i class="fas fa-check-circle"></i> Correct! Well done!</p>';
+    
+    const termId = `${currentCategory}_${currentIndex}`;
+    termsStats[`correct_${termId}`] = (termsStats[`correct_${termId}`] || 0) + 1;
+    localStorage.setItem('termStats', JSON.stringify(termsStats));
+    
+    setTimeout(() => {
+      if (currentIndex < currentCards.length - 1) {
+        nextCard();
+      } else {
+        currentIndex = 0;
+        displayCurrentCard();
+        updateCardCounter();
+        document.getElementById('prevCardBtn').disabled = true;
+        document.getElementById('nextCardBtn').disabled = false;
+      }
+      if (flashcard) flashcard.classList.remove('flipped');
+      quizAnswer.value = '';
+      quizFeedback.innerHTML = '';
+      if (quizAnswer) quizAnswer.focus();
+    }, 1500);
+  } else {
+    quizFeedback.innerHTML = `<p style="color: var(--incorrect);"><i class="fas fa-times-circle"></i> Incorrect. The correct answer is "${currentCards[currentIndex].english}"</p>`;
+    
+    const termId = `${currentCategory}_${currentIndex}`;
+    termsStats[`incorrect_${termId}`] = (termsStats[`incorrect_${termId}`] || 0) + 1;
+    localStorage.setItem('termStats', JSON.stringify(termsStats));
+  }
+  
+  updateTermStats();
+}
+
+// Update terminology statistics
+function updateTermStats() {
+  const studiedTerms = Object.keys(termsStats).filter(
+    id => !id.includes('correct_') && !id.includes('incorrect_')
+  ).length;
+  
+  const correctAnswers = Object.keys(termsStats).filter(
+    id => id.includes('correct_')
+  ).reduce((sum, id) => sum + (termsStats[id] || 0), 0);
+  
+  const incorrectAnswers = Object.keys(termsStats).filter(
+    id => id.includes('incorrect_')
+  ).reduce((sum, id) => sum + (termsStats[id] || 0), 0);
+  
+  const totalAttempts = correctAnswers + incorrectAnswers;
+  
+  const termsLearnedEl = document.getElementById('termsLearned');
+  const quizScoreEl = document.getElementById('quizScore');
+  const studyStreakEl = document.getElementById('studyStreak');
+  
+  if (termsLearnedEl) termsLearnedEl.textContent = studiedTerms;
+  if (quizScoreEl) {
+    quizScoreEl.textContent = totalAttempts > 0 ? Math.round((correctAnswers / totalAttempts) * 100) + '%' : '0%';
+  }
+  
+  const lastStudy = localStorage.getItem('lastStudyDate');
+  const today = new Date().toDateString();
+  
+  if (lastStudy !== today) {
+    if (lastStudy === new Date(Date.now() - 86400000).toDateString()) {
+      let streak = parseInt(localStorage.getItem('studyStreak') || '0');
+      streak++;
+      localStorage.setItem('studyStreak', streak);
+      localStorage.setItem('lastStudyDate', today);
+    } else if (!lastStudy) {
+      localStorage.setItem('studyStreak', '1');
+      localStorage.setItem('lastStudyDate', today);
+    }
+  }
+  
+  if (studyStreakEl) {
+    studyStreakEl.textContent = localStorage.getItem('studyStreak') || '0';
+  }
+}
+
+// Keyboard support
+document.addEventListener('keydown', function(e) {
+  if (quizMode && e.key === 'Enter') {
+    e.preventDefault();
+    checkQuizAnswer();
+  }
+});
+
+// Add CSS for notifications
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+`;
+document.head.appendChild(style);
+
+// Close modal when clicking outside content
+document.addEventListener('DOMContentLoaded', function() {
+  const kataModal = document.getElementById('kataModal');
+  if (kataModal) {
+    kataModal.addEventListener('click', function(e) {
+      if (e.target === kataModal) {
+        closeKataModal();
+      }
+    });
+  }
+  
+  const coreModal = document.getElementById('coreTechniquesModal');
+  if (coreModal) {
+    coreModal.addEventListener('click', function(e) {
+      if (e.target === coreModal) {
+        closeCoreTechniquesModal();
+      }
+    });
+  }
+  
+  const sparringModal = document.getElementById('sparringModal');
+  if (sparringModal) {
+    sparringModal.addEventListener('click', function(e) {
+      if (e.target === sparringModal) {
+        closeSparringModal();
+      }
+    });
+  }
+  
+  const equipmentModal = document.getElementById('equipmentModal');
+  if (equipmentModal) {
+    equipmentModal.addEventListener('click', function(e) {
+      if (e.target === equipmentModal) {
+        closeEquipmentModal();
+      }
+    });
+  }
+});
+
+// Initialize
+init();
+</script>
+
+<script>
+
+angular.module("karateApp",[])
+
+.controller("mainCtrl",function($scope,$http){
+
+$scope.signup=function(){
+
+$http.post("https://your-render-url/signup",{
+
+username:$scope.signupUsername,
+password:$scope.signupPassword
+
+}).then(()=>{
+
+alert("Account created");
+
+});
+
+};
+
+
+$scope.login=function(){
+
+$http.post("https://your-render-url/login",{
+
+username:$scope.loginUsername,
+password:$scope.loginPassword
+
+})
+
+.then(res=>{
+
+alert("Login success");
+
+})
+
+.catch(()=>{
+
+alert("Invalid");
+
+});
+
+};
+
+});
+
+</script>
+</body>
+</html>
